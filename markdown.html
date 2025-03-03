@@ -394,9 +394,19 @@ Kolekting data (data collection) adalah proses mengumpulkan data dari berbagai s
 <p>Pengertian :<br>
 Deteksi outlier merupakan proses menemukan data yang berbeda jauh dari data lainnya dalam suatu dataset. Outlier bisa terjadi karena kesalahan input, variasi alami, atau terdapat anomali</p><br>
 
-<h4>Metode K-Nearest Neighbors (KNN)</h4><br>
+<h4>Metode K-Nearest Neighbors (KNN)</h4>
 <p>Pengertian :<br>
 K-Nearest Neighbors (KNN) merupakan algoritma machine learning yang digunakan untuk klasifikasi dan regresi berdasarkan kedekatan data (ketetanggaan)</p><br>
+
+<p>Cara Kerja K-Nearest Neighbors (KNN)</p>
+<p>1. Hitung Jarak Antar Data, bisa memakai rumus Euclidean atau Manhattan untuk mengukur kedekatan setiap titik dengan tetangganya<br>
+  A. Euclidean adalah jarak garis lurus antara dua titik dalam ruang<br>
+      Rumus :
+      d = \sqrt{(x2-x1)^{2}+(y2-y1)^{2}}<br>
+2. Menentukan K (jumlah tetangga), Untuk setiap titik cari K data terdekat<br>
+3. Hitung skor Outlier, gunakan perbandingan kepadatan suatu titik dengan tetangganya jika suatu titik memiliki kepadatan yang jauh lebih kecil dari rata-rata tetangganya, kemungkinan itu adalah outlier<br>
+</p>
+
 <!-- <section id="learn-more">
 <h2>Learn more<a class="headerlink" href="#learn-more" title="Link to this heading">#</a></h2>
 <p>This is just a simple starter to get you started.
