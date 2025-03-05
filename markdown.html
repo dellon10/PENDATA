@@ -23,6 +23,22 @@
     <style>
       .pst-js-only { display: none !important; }
 
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: Consolas, "Courier New", monospace;
+        }
+        code {
+            color: #c7254e;
+            background-color: #f9f2f4;
+            padding: 2px 4px;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+
     </style>
   </noscript>
   
@@ -1728,8 +1744,13 @@ K-Nearest Neighbors (KNN) merupakan algoritma machine learning yang digunakan un
 <br>
 <h5>11. Masukkan kode untuk menentukan hasil Outlier</h5>
 <ul>
-    <p>disini saya menggunakan k = 4</p>
-</ul><br>
+    <p>Kode ini digunakan untuk menentukan outlier pada data Iris menggunakan metode Euclidean Distance dan menyimpan hasilnya ke dalam file Excel<br>
+    pandas untuk membaca dan menyimpan data Excel<br>
+    numpy untuk operasi matematika dan array<br>
+    cdist dari scipy.spatial.distance → untuk menghitung jarak Euclidean antar titik data<br>
+    Menambahkan kolom "Is_Outlier" → True jika outlier, False jika bukan outlier<br>
+    </p>
+</ul>
 <pre><code>
 import pandas as pd
 import numpy as np
