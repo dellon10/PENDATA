@@ -1744,12 +1744,11 @@ K-Nearest Neighbors (KNN) merupakan algoritma machine learning yang digunakan un
 <br>
 <h5>11. Masukkan kode untuk menentukan hasil Outlier</h5>
 <ul>
-    <p>Kode ini digunakan untuk menentukan outlier pada data Iris menggunakan metode Euclidean Distance dan menyimpan hasilnya ke dalam file Excel<br>
-    pandas untuk membaca dan menyimpan data Excel<br>
-    numpy untuk operasi matematika dan array<br>
-    cdist dari scipy.spatial.distance → untuk menghitung jarak Euclidean antar titik data<br>
-    Menambahkan kolom "Is_Outlier" → True jika outlier, False jika bukan outlier<br>
-    </p>
+    <p>Kode ini digunakan untuk menentukan outlier pada data Iris menggunakan metode Euclidean Distance dan menyimpan hasilnya ke dalam file Excel</p><br>
+    <li>pandas untuk membaca dan menyimpan data Excel</li><br>
+    <li>numpy untuk operasi matematika dan array</li><br>
+    <li>cdist dari scipy.spatial.distance untuk menghitung jarak Euclidean antar titik data</li><br>
+    <li>Menambahkan kolom "Is_Outlier" → True jika outlier, False jika bukan outlier</li><br>
 </ul>
 <pre><code>
 import pandas as pd
@@ -1781,6 +1780,16 @@ print(df[["id", "Outlier_Score", "Is_Outlier"]])
 # Simpan ke Excel
 df.to_excel("hasil_outlierrr.xlsx", index=False)
 </code></pre>
+<br>
+<h5>12. Lihat hasil outlier pada Excel</h5>
+<ul>
+    <p>apabila hasilnya TRUE maka itu adalah outlier namun jika hasilnya FALSE maka bukan outlier</p>
+</ul>
+    <img src="hasil_ol.png" class="logo__image only-light" alt="hasil_ol"/>
+    <img src="hasil_ol.png" class="logo__image only-dark pst-js-only" alt="hasil_ol"/>
+<p>
+  
+</p>
 <br>
 
 <!-- <section id="learn-more">
