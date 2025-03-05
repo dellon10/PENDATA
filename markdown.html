@@ -406,6 +406,72 @@
 <p>Pengertian :<br>
 Kolekting data (data collection) adalah proses mengumpulkan data dari berbagai sumber untuk dianalisis dalam data mining. Data ini bisa berasal dari survei, sensor, transaksi bisnis dan lainnya</p><br>
 
+<h3>Langkah Langkah Pengerjaan</h3>
+<br>
+<h5>1. !pip install pymysql</h5>
+  <p>!pip install pymysql digunakan untuk Koneksi ke MySQL dengan Python</p>
+<p>
+  
+</p>
+<br>
+<h5>2. !pip install psycopg2-binary</h5>
+  <p>!pip install pymysql digunakan untuk Koneksi ke PostgreSQL dengan Python</p>
+<p>
+  
+</p>
+<br>
+<h5>3. !pip install pymysql psycopg2 pandas sqlalchemy</h5>
+  <p>Pandas Untuk membaca, mengolah, dan menyimpan data</p>
+  <p>sqlalchemy Membantu membuat koneksi database dengan lebih mudah</p>
+<p>
+  
+</p>
+<br>
+<h5>4. Masukkan Codenya</h5>
+  <pre><code>
+import pandas as pd
+from sqlalchemy import create_engine
+
+# Koneksi ke MySQL
+mysql_user = "avnadmin"
+mysql_password = "****"
+mysql_host = "mysql-*****-irismysql23126.g.aivencloud.com"
+mysql_port = "19324"
+mysql_db = "defaultdb"
+
+mysql_engine = create_engine(f"mysql+pymysql://{mysql_user}:{mysql_password}@{mysql_host}:{mysql_port}/{mysql_db}")
+
+# Koneksi ke PostgreSQL
+pg_user = "avnadmin"
+pg_password = "****"
+pg_host = "pg-*****-posgrestqlpendata.g.aivencloud.com"
+pg_port = "10517"
+pg_db = "defaultdb"
+
+pg_engine = create_engine(f"postgresql+psycopg2://{pg_user}:{pg_password}@{pg_host}:{pg_port}/{pg_db}")
+
+# Ambil data dari MySQL
+query_mysql = 'SELECT id, "Class", petal_length, petal_width FROM iris_data'
+df_mysql = pd.read_sql(query_mysql, mysql_engine)
+
+# Ambil data dari PostgreSQL (kolom dengan spasi diapit tanda kutip ganda)
+query_pg = 'SELECT id, "Class", "sepal length" AS sepal_length, "sepal width" AS sepal_width FROM posgres'
+df_pg = pd.read_sql(query_pg, pg_engine)
+
+# Gabungkan berdasarkan id dan Class (full outer join)
+df_combined = pd.merge(df_mysql, df_pg, on=["id", "Class"], how="outer")
+
+# Simpan ke CSV
+df_combined.to_csv("combined_iris.csv", index=False)
+
+# Print hasil gabungan
+print(df_combined.to_string(index=False))
+</code></pre>
+<br>
+<p>
+  
+</p>
+<br>
 <table border="1" class="dataframe table table-bordered">
   <thead>
     <tr style="text-align: right;">
@@ -1620,6 +1686,11 @@ Kolekting data (data collection) adalah proses mengumpulkan data dari berbagai s
     </tr>
   </tbody>
 </table><br>
+<p>
+  
+</p>
+<br>
+    <h5>Grafik Plot</h5>
     <img src="scatterplot.png" class="logo__image only-light" alt="Scatter Plot"/>
     <img src="scatterplot.png" class="logo__image only-dark pst-js-only" alt="Scatter Plot"/><br>
 <p>
