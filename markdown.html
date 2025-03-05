@@ -1726,6 +1726,41 @@ K-Nearest Neighbors (KNN) merupakan algoritma machine learning yang digunakan un
   
 </p>
 <br>
+<h5>11. Masukkan kode untuk menentukan hasil Outlier</h5>
+<ul>
+    <p>disini saya menggunakan k = 4</p>
+</ul><br>
+<pre><code>
+import pandas as pd
+import numpy as np
+from scipy.spatial.distance import cdist
+
+# Baca data dari Excel 
+df = pd.read_excel("/content/drive/My Drive/kombi_iris_final.xlsx")
+
+# Ambil hanya kolom fitur (tanpa ID & Class)
+X = df[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']]
+print(X.head())  # Cek hasilnya
+
+# Hitung Jarak Euclidean untuk Semua Titik
+distances = cdist(X, X, metric='euclidean')
+
+K = 4  # Ubah jumlah tetangga terdekat menjadi 4
+sorted_distances = np.sort(distances, axis=1)  # Urutkan jarak
+avg_k_nearest = np.mean(sorted_distances[:, 1:K+1], axis=1)  # Ambil rata-rata 4 terdekat
+
+# Hitung Outlier (Gunakan Mean + 2*Std)
+threshold = np.mean(avg_k_nearest) + 2 * np.std(avg_k_nearest)
+df["Outlier_Score"] = avg_k_nearest
+df["Is_Outlier"] = df["Outlier_Score"] > threshold
+
+# Tampilkan Hasil
+print(df[["id", "Outlier_Score", "Is_Outlier"]])
+
+# Simpan ke Excel
+df.to_excel("hasil_outlierrr.xlsx", index=False)
+</code></pre>
+<br>
 
 <!-- <section id="learn-more">
 <h2>Learn more<a class="headerlink" href="#learn-more" title="Link to this heading">#</a></h2>
