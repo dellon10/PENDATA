@@ -481,7 +481,7 @@ Ambil jarak ke k-terdekat sebagai K-Distance</p>
 <p>Jika LOF < 1, berarti titik lebih padat dibanding sekitarnya</p>
                   
 <br>
-<h4>Langkah Langkah Pengerjaan Hitung Manual</h4>
+<h4>Langkah Langkah Pengerjaan Hitung Manual (Excel)</h4>
 <h6>1. Siapkan 10 data dengan 2 fitur :</h6>
 <ul>
 <!--     <p>urutkan hasil semua perhitungan dari yang terkecil hingga terbesar</p> -->
@@ -558,6 +558,78 @@ Ambil jarak ke k-terdekat sebagai K-Distance</p>
 </ul>
     <img src="lof.png" class="logo__image only-light" alt="lof"/>
     <img src="lof.png" class="logo__image only-dark pst-js-only" alt="lof"/>
+<p>
+<h4>Langkah Langkah Pengerjaan Hitung sklearn (coding)</h4>
+<h6>1. Siapkan 10 data dengan 2 fitur :</h6>
+<ul>
+<!--     <p>urutkan hasil semua perhitungan dari yang terkecil hingga terbesar</p> -->
+</ul>
+    <img src="10data.png" class="logo__image only-light" alt="10data"/>
+    <img src="10data.png" class="logo__image only-dark pst-js-only" alt="10data"/>
+<p>
+  
+</p>
+<br>
+<h6>2. Import Library :</h6>
+<ul>
+    <p>NumPy (np) Digunakan untuk operasi numerik<br>
+    Pandas (pd) Digunakan untuk membuat dan mengelola tabel data<br>
+    Matplotlib (plt) Digunakan untuk membuat grafik<br>
+    LocalOutlierFactor (LOF) Digunakan untuk mendeteksi outlier dalam dataset</p>
+</ul>
+<p>
+  
+</p>
+<br>
+<h6>3. Membuat Data Awal :</h6>
+<ul>
+    <p>Kode membuat DataFrame dari pandas yang menyimpan data dalam bentuk tabel</p>
+</ul>
+    <img src="10data.png" class="logo__image only-light" alt="10data"/>
+    <img src="10data.png" class="logo__image only-dark pst-js-only" alt="10data"/>
+<p>
+  
+</p>
+<br>
+<h6>4. Menjalankan Local Outlier Factor (LOF) :</h6>
+<ul>
+    <p>Variabel X menyimpan data numerik dari kolom X1 dan X2 dalam bentuk array NumPy<br>
+      Objek LOF (LocalOutlierFactor) dibuat dengan parameter n_neighbors=3, akan dibandingkan setiap titik dengan 3 tetangga terdekatnya untuk menentukan apakah data tersebut outlier atau bukan</p>
+</ul>
+    <img src="10data.png" class="logo__image only-light" alt="10data"/>
+    <img src="10data.png" class="logo__image only-dark pst-js-only" alt="10data"/>
+<p>
+  
+</p>
+<br>
+<h6>5. Menganalisis Outlier :</h6>
+<ul>
+    <p>fit_predict(X) Memproses data X dan mengembalikan prediksi (-1 = outlier, 1 = normal)<br>
+      lof.negative_outlier_factor_ Menghasilkan skor LOF untuk setiap data (skor yang lebih tinggi menunjukkan kemungkinan besar sebagai outlier)<br>
+      gunakan tanda (-) di -lof.negative_outlier_factor_ karena nilai asli LOF dari Scikit-Learn bersifat negatif, sehingga harus diubah menjadi positif</p>
+</ul>
+    <img src="10data.png" class="logo__image only-light" alt="10data"/>
+    <img src="10data.png" class="logo__image only-dark pst-js-only" alt="10data"/>
+<p>
+  
+</p>
+<br>
+<h6>6. Menambahkan Hasil LOF ke DataFrame :</h6>
+<ul>
+    <p>np.round(lof_scores, 4) LOF Score dibulatkan hingga 4 angka desimal</p>
+</ul>
+    <img src="10data.png" class="logo__image only-light" alt="10data"/>
+    <img src="10data.png" class="logo__image only-dark pst-js-only" alt="10data"/>
+<p>
+  
+</p>
+<br>
+<h6>7. Menampilkan Hasil :</h6>
+<ul>
+    <p>Kode ini akan mencetak tabel akhir dengan LOF Score dan status outlier untuk setiap ID.</p>
+</ul>
+    <img src="10data.png" class="logo__image only-light" alt="10data"/>
+    <img src="10data.png" class="logo__image only-dark pst-js-only" alt="10data"/>
 <p>
   
 </p>
