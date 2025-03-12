@@ -448,13 +448,37 @@ Ambil jarak ke k-terdekat sebagai K-Distance</p>
 
 <h6>Cara Menghitung :</h6>
 <p>Rumus :</p>
-
+    <img src="rd.png" class="logo__image only-light" alt="rd"/>
+    <img src="rd.png" class="logo__image only-dark pst-js-only" alt="rd"/>
 <br>
 <p>p = titik yang sedang dianalisis</p>
 <p>o = tetangga dari p</p>
-<p>Jika Jarak(p, o) < K-Distance(o), maka gunakan K-Distance(o) sebagai RD</p>
+<p>Jika Jarak(p, o) <= K-Distance(o), maka gunakan K-Distance(o) sebagai RD</p>
 
 
+<h4>LRD (Local Reachability Density)</h4>
+<p>menunjukkan kepadatan lokal suatu titik</p>
+  
+<h6>Cara Menghitung :</h6>
+<p>Rumus :</p>
+    <img src="lrd.png" class="logo__image only-light" alt="lrd"/>
+    <img src="lrd.png" class="logo__image only-dark pst-js-only" alt="lrd"/>
+<br>
+<p>kNN(p) = k tetangga terdekat dari p</p>
+<p>Semakin besar LRD, berarti titik berada di daerah yang lebih padat</p>
+
+<h4>LOF (Local Outlier Factor)</h4>
+<p>digunakan untuk mendeteksi outlier dengan membandingkan kepadatan lokal titik p dengan kepadatan lokal tetangganya</p>
+  
+<h6>Cara Menghitung :</h6>
+<p>Rumus :</p>
+    <img src="lof.png" class="logo__image only-light" alt="lof"/>
+    <img src="lof.png" class="logo__image only-dark pst-js-only" alt="lof"/>
+<br>
+<p>Jika LOF ≈ 1, maka titik memiliki kepadatan yang sama dengan tetangganya (bukan outlier)</p>
+<p>Jika LOF > 1, berarti titik tersebut lebih jarang dibanding tetangganya bisa jadi outlier</p>
+<p>Jika LOF > 1.2, sering dianggap sebagai outlier</p>
+<p>Jika LOF < 1, berarti titik lebih padat dibanding sekitarnya</p>
                   
 <br>
 <h4>Langkah Langkah Pengerjaan Hitung Manual</h4>
