@@ -434,7 +434,29 @@
 <h6>C. Perbandingan Kerapatan (Density Comparison)</h6>
 <p>Jika suatu titik memiliki kepadatan jauh lebih rendah dibandingkan dengan tetangganya, maka titik tersebut dianggap sebagai outlier</p>
 
+<h4>K-Distance (Jarak K-Terdekat)</h4>
+<p>adalah jarak dari suatu titik ke tetangga ke-k terdekatnya</p>
 
+<h6>Cara Menghitung :</h6>
+<p>1. Hitung jarak setiap titik ke titik lainnya contohnya dengan Euclidean Distance<br>
+Hitung jarak setiap titik ke titik lainnya contohnya dengan Euclidean Distance<br>
+Ambil jarak ke k-terdekat sebagai K-Distance</p>
+
+
+<h4>RD (Reachability Distance)</h4>
+<p>adalah jarak antara suatu titik dengan tetangganya, tetapi jika jaraknya lebih kecil dari K-Distance maka menggunakan K-Distance</p>
+
+<h6>Cara Menghitung :</h6>
+<p>Rumus :</p>
+
+<br>
+<p>p = titik yang sedang dianalisis</p>
+<p>o = tetangga dari p</p>
+<p>Jika Jarak(p, o) < K-Distance(o), maka gunakan K-Distance(o) sebagai RD</p>
+
+
+                  
+<br>
 <h4>Langkah Langkah Pengerjaan Hitung Manual</h4>
 <h6>1. Siapkan 10 data dengan 2 fitur :</h6>
 <ul>
