@@ -577,6 +577,12 @@ Ambil jarak ke k-terdekat sebagai K-Distance</p>
     Matplotlib (plt) Digunakan untuk membuat grafik<br>
     LocalOutlierFactor (LOF) Digunakan untuk mendeteksi outlier dalam dataset</p>
 </ul>
+    <pre><code>
+      import numpy as np
+      import pandas as pd
+      import matplotlib.pyplot as plt
+      from sklearn.neighbors import LocalOutlierFactor
+    </code></pre>
 <p>
   
 </p>
@@ -585,8 +591,15 @@ Ambil jarak ke k-terdekat sebagai K-Distance</p>
 <ul>
     <p>Kode membuat DataFrame dari pandas yang menyimpan data dalam bentuk tabel</p>
 </ul>
-    <img src="10data.png" class="logo__image only-light" alt="10data"/>
-    <img src="10data.png" class="logo__image only-dark pst-js-only" alt="10data"/>
+    <pre><code>
+    data = {
+    "ID": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    "X1": [8.0, 2.3, 3.2, 7.5, 7.8, 4.1, 3.7, 4.9, 5.6, 6.3], 
+    "X2": [0.5, 2.9, 6.2, 9.5, 0.3, 4.4, 3.5, 5.3, 4.4, 5.4]
+    }
+
+    df = pd.DataFrame(data)
+    </code></pre>
 <p>
   
 </p>
@@ -596,8 +609,10 @@ Ambil jarak ke k-terdekat sebagai K-Distance</p>
     <p>Variabel X menyimpan data numerik dari kolom X1 dan X2 dalam bentuk array NumPy<br>
       Objek LOF (LocalOutlierFactor) dibuat dengan parameter n_neighbors=3, akan dibandingkan setiap titik dengan 3 tetangga terdekatnya untuk menentukan apakah data tersebut outlier atau bukan</p>
 </ul>
-    <img src="10data.png" class="logo__image only-light" alt="10data"/>
-    <img src="10data.png" class="logo__image only-dark pst-js-only" alt="10data"/>
+    <pre><code>
+    X = df[["X1", "X2"]].values
+    lof = LocalOutlierFactor(n_neighbors=3)
+    </code></pre>
 <p>
   
 </p>
@@ -608,8 +623,10 @@ Ambil jarak ke k-terdekat sebagai K-Distance</p>
       lof.negative_outlier_factor_ Menghasilkan skor LOF untuk setiap data (skor yang lebih tinggi menunjukkan kemungkinan besar sebagai outlier)<br>
       gunakan tanda (-) di -lof.negative_outlier_factor_ karena nilai asli LOF dari Scikit-Learn bersifat negatif, sehingga harus diubah menjadi positif</p>
 </ul>
-    <img src="10data.png" class="logo__image only-light" alt="10data"/>
-    <img src="10data.png" class="logo__image only-dark pst-js-only" alt="10data"/>
+    <pre><code>
+    y_pred = lof.fit_predict(X)
+    lof_scores = -lof.negative_outlier_factor_
+    </code></pre>
 <p>
   
 </p>
@@ -618,8 +635,10 @@ Ambil jarak ke k-terdekat sebagai K-Distance</p>
 <ul>
     <p>np.round(lof_scores, 4) LOF Score dibulatkan hingga 4 angka desimal</p>
 </ul>
-    <img src="10data.png" class="logo__image only-light" alt="10data"/>
-    <img src="10data.png" class="logo__image only-dark pst-js-only" alt="10data"/>
+    <pre><code>
+    df["LOF Score"] = np.round(lof_scores, 4)
+    df["Outlier"] = df["ID"].isin([4, 1, 5])
+    </code></pre>
 <p>
   
 </p>
@@ -628,8 +647,9 @@ Ambil jarak ke k-terdekat sebagai K-Distance</p>
 <ul>
     <p>Kode ini akan mencetak tabel akhir dengan LOF Score dan status outlier untuk setiap ID.</p>
 </ul>
-    <img src="10data.png" class="logo__image only-light" alt="10data"/>
-    <img src="10data.png" class="logo__image only-dark pst-js-only" alt="10data"/>
+    <pre><code>
+      print(df)
+    </code></pre>
 <p>
   
 </p>
