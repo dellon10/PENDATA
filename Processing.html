@@ -512,62 +512,55 @@ Ambil jarak ke k-terdekat sebagai K-Distance</p>
   
 </p>
 <br>
-<h6>4. Tentukan nilai RD :</h6>
+<h6>4. Tentukan K-Nearest Neighbors :</h6>
 <ul>
-    <p>gunakan rumus untuk mencari RD <b><i>=MAX(Table2[@[K Distance]];Table2[@[Jarak ke 1]:[Jarak ke 10]])</i></b></p>
+    <p>gunakan 3 nilai terdekat</i></b></p>
 </ul>
-    <img src="rd1.png" class="logo__image only-light" alt="rD"/>
-    <img src="rd1.png" class="logo__image only-dark pst-js-only" alt="rd"/>
+    <img src="for.png" class="logo__image only-light" alt="K Distance"/>
+    <img src="for.png" class="logo__image only-dark pst-js-only" alt="K Distance"/>
 <p>
   
 </p>
 <br>
-<h6>5. Urutkan nilai K-Distance :</h6>
+<h6>5. Tentukan nilai RD :</h6>
 <ul>
-    <p>urutkan nilai K-Distance dari yang terendah hingga tertinggi</p>
+    <p>gunakan rumus untuk mencari RD <b><i>=MAX(K-Distance;K-NN)</i></b></p>
 </ul>
-    <img src="rd2.png" class="logo__image only-light" alt="rD"/>
-    <img src="rd2.png" class="logo__image only-dark pst-js-only" alt="rd"/>
+    <img src="five.png" class="logo__image only-light" alt="rD"/>
+    <img src="five.png" class="logo__image only-dark pst-js-only" alt="rd"/>
 <p>
   
 </p>
 <br>
-<h6>5. Hitung kembali RD :</h6>
+<h6>6. Hitung Nilai LRD Penyebut:</h6>
 <ul>
-    <p>gunakan rumus untuk mencari RD baru yang telah diurutkan <b><i>=MAX(Table24[@[K Distance]];Table24[@[Jarak ke 1]:[Jarak ke 10]])</i></b></p>
+    <p>gunakan rumus untuk mencari LRD baru yang telah diurutkan <b><i>=AVERAGE(RD1,RD2,RD3)</i></b></p>
 </ul>
-    <img src="rdn.png" class="logo__image only-light" alt="rD"/>
-    <img src="rdn.png" class="logo__image only-dark pst-js-only" alt="rd"/>
+    <img src="six.png" class="logo__image only-light" alt="rD"/>
+    <img src="six.png" class="logo__image only-dark pst-js-only" alt="rd"/>
 <p>
   
 </p>
 <br>
-<h6>6. Hitung LRD :</h6>
+<h6>7. Hitung LRD :</h6>
 <ul>
-    <p>gunakan rumus untuk mencari LRD <b><i>=3 / SUM(RD1:RD2:RD3)</i></b></p>
+    <p>gunakan rumus untuk mencari LRD <b><i>=3 / Hasil RD</i></b></p>
 </ul>
-    <img src="lrd.png" class="logo__image only-light" alt="rdn"/>
-    <img src="lrd.png" class="logo__image only-dark pst-js-only" alt="rdn"/>
+    <img src="seven.png" class="logo__image only-light" alt="rdn"/>
+    <img src="seven.png" class="logo__image only-dark pst-js-only" alt="rdn"/>
 <p>
   
 </p>
 <br>
-<h6>7. Hitung LOF :</h6>
+<h6>8. Hitung LOF :</h6>
 <ul>
-    <p>gunakan rumus untuk mencari LOF <b><i>= (Q21/Q20 + Q22/Q20 + Q23/Q20) / 3</i></b></p>
+    <p>gunakan rumus untuk mencari LOF <b><i>=((LRD1/LRD)+(LRD2/LRD)+(LRD3/LRD))/3</i></b></p>
 </ul>
-    <img src="lof.png" class="logo__image only-light" alt="lof"/>
-    <img src="lof.png" class="logo__image only-dark pst-js-only" alt="lof"/>
+    <img src="eight.png" class="logo__image only-light" alt="lof"/>
+    <img src="eight.png" class="logo__image only-dark pst-js-only" alt="lof"/>
 <p>
 <br>
-<h6>8. Hasil Akhir :</h6>
-<ul>
-    <p>hasil akhir perhitungan manual</p>
-</ul>
-    <img src="ham.png" class="logo__image only-light" alt="ham"/>
-    <img src="ham.png" class="logo__image only-dark pst-js-only" alt="ham"/>
-<p>
-<br>
+
   
 
 <br>
@@ -576,8 +569,8 @@ Ambil jarak ke k-terdekat sebagai K-Distance</p>
 <ul>
 <!--     <p>urutkan hasil semua perhitungan dari yang terkecil hingga terbesar</p> -->
 </ul>
-    <img src="10data.png" class="logo__image only-light" alt="10data"/>
-    <img src="10data.png" class="logo__image only-dark pst-js-only" alt="10data"/>
+    <img src="satu.png" class="logo__image only-light" alt="10data"/>
+    <img src="satu.png" class="logo__image only-dark pst-js-only" alt="10data"/>
 <p>
   
 </p>
