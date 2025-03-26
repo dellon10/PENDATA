@@ -704,35 +704,79 @@ Ambil jarak ke k-terdekat sebagai K-Distance</p>
 <h6>Langkah Langkah Klasifikasi :</h6>
 <ul>
   <p>1. Persiapan Data :<br>
-  Pisahkan data menjadi fitur (𝑋) dan label (𝑌)</p>
+  Pisahkan data menjadi fitur (𝑋) dan kelas (𝑌)</p>
 </ul>
 <br>
 
+<h6>2. Hitung Prior Probability :</h6>
 <ul>
-  <p>2. Hitung Probabilitas Awal (𝑃(𝑌)) :<br>
-  Hitung frekuensi setiap kelas dalam dataset</p>
+    <p>P(Y) = Prior Probability (Probabilitas awal kelas 𝑌 Y, sebelum melihat fitur 𝑋 X)<br>
+    Gunakan Rumus :</p>
 </ul>
+    <img src="pri.png" class="logo__image only-light" alt="pri"/>
+    <img src="pri.png" class="logo__image only-dark pst-js-only" alt="pri"/>
+<p>
+  
+</p>
 <br>
 
+<h6>3. Hitung Likelihood :</h6>
 <ul>
-  <p>3. Hitung Likelihood (𝑃(𝑋|𝑌)) :<br>
-  Untuk setiap fitur, hitung probabilitas kemunculannya dalam setiap kelas</p>
+    <p>𝑃 ( 𝑋 ∣ 𝑌 ) P(X∣Y) = Likelihood (Probabilitas munculnya fitur 𝑋 X jika diketahui kelas 𝑌 Y), menggunakan distribusi Gaussian<br>
+    Gunakan Rumus :</p>
 </ul>
+    <img src="ll.png" class="logo__image only-light" alt="ll"/>
+    <img src="ll.png" class="logo__image only-dark pst-js-only" alt="ll"/>
+<p>
+  
+</p>
 <br>
 
+<h6>4. Hitung Posterior Probability :</h6>
 <ul>
-  <p>4. Gabungkan dengan Teorema Bayes :<br>
-  Gunakan rumus :</p>
-    <img src="nb.png" class="logo__image only-light" alt="nb"/>
-    <img src="nb.png" class="logo__image only-dark pst-js-only" alt="nb"/>
+    <p>P(Y∣X) = Probabilitas Posterior (Probabilitas kelas 𝑌 Y berdasarkan fitur 𝑋 X)<br>
+    Gunakan Rumus :</p>
 </ul>
+    <img src="pstr.png" class="logo__image only-light" alt="pstr"/>
+    <img src="pstr.png" class="logo__image only-dark pst-js-only" alt="pstr"/>
+<p>
+  
+</p>
 <br>
 
+<h6>5. Evidence :</h6>
 <ul>
-  <p>5. Prediksi Kelas :<br>
-  Pilih kelas dengan nilai 𝑃(𝑌|𝑋) tertinggi</p>
+    <p>P(X) = Evidence (Probabilitas keseluruhan dari fitur 𝑋 X)</p>
 </ul>
+<!--     <img src="pstr.png" class="logo__image only-light" alt="pstr"/>
+    <img src="pstr.png" class="logo__image only-dark pst-js-only" alt="pstr"/> -->
+<p>
+  
+</p>
 <br>
+
+<h4>Langkah Langkah Pengerjaan Hitung Manual (Excel)</h4>
+<h6>1. Siapkan 10 data dengan 2 fitur :</h6>
+<ul>
+<!--     <p>urutkan hasil semua perhitungan dari yang terkecil hingga terbesar</p> -->
+</ul>
+    <img src="satu.png" class="logo__image only-light" alt="10data"/>
+    <img src="satu.png" class="logo__image only-dark pst-js-only" alt="10data"/>
+<p>
+  
+</p>
+<br>
+<h6>2. Siapkan 10 data dengan 2 fitur :</h6>
+<ul>
+    <p>𝑃 ( 𝑌 ∣ 𝑋 ) P(Y∣X) = Probabilitas Posterior (Probabilitas kelas 𝑌 Y berdasarkan fitur 𝑋 X)</p>
+</ul>
+    <img src="pri.png" class="logo__image only-light" alt="pri"/>
+    <img src="pri.png" class="logo__image only-dark pst-js-only" alt="pri"/>
+<p>
+  
+</p>
+<br>
+
 <!-- <section id="learn-more">
 <h2>Learn more<a class="headerlink" href="#learn-more" title="Link to this heading">#</a></h2>
 <p>This is just a simple starter to get you started.
