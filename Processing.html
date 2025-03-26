@@ -687,18 +687,36 @@ Ambil jarak ke k-terdekat sebagai K-Distance</p>
     <img src="lof (20.png" class="logo__image only-light" alt="lof"/>
     <img src="lof (2).png" class="logo__image only-dark pst-js-only" alt="lof"/>
 <br>
-<p>Penjelasan :</p>
+
+<h6>Penjelasan :</h6>
 <p>𝑃(𝑌|𝑋): Probabilitas posterior (kelas 𝑌 diberikan fitur 𝑋)</p>
 <p>𝑃(𝑋|𝑌): Likelihood (probabilitas fitur𝑋 diberikan kelas 𝑌)</p>
 <p>𝑃(𝑌): Prior probability (probabilitas awal kelas 𝑌)</p>
 <p>𝑃(𝑋): Evidence (probabilitas fitur 𝑋 secara keseluruhan)</p>                 
 <br>
-<p>Tujuan :</p>
+
+<h6>Tujuan :</h6>
 <p>Mencari kelas 𝑌 dengan nilai 𝑃(𝑌|𝑋) tertinggi</p>
 <br>
-<p>Langkah Langkah Klasifikasi :</p>
-<P>
+
+<h6>Langkah Langkah Klasifikasi :</h6>
+<p><b>1. Persiapan Data :</b></p>
 <p>Pisahkan data menjadi fitur (𝑋) dan label (𝑌)</p>
+<br>
+<p><b>2. Hitung Probabilitas Awal (𝑃(𝑌)):</b></p>
+<p>Hitung frekuensi setiap kelas dalam dataset</p>
+<br>
+<p><b>3. Hitung Likelihood (𝑃(𝑋|𝑌)):</b></p>
+<p>Untuk setiap fitur, hitung probabilitas kemunculannya dalam setiap kelas</p>
+<br>
+<p><b>4. Gabungkan dengan Teorema Bayes:</b></p>
+<p>Gunakan rumus :</p>
+    <img src="lof (20.png" class="logo__image only-light" alt="lof"/>
+    <img src="lof (2).png" class="logo__image only-dark pst-js-only" alt="lof"/>
+<br>
+<p><b>5. Prediksi Kelas:</b></p>
+<p>Pilih kelas dengan nilai 𝑃(𝑌|𝑋) tertinggi</p>
+<br>
 <!-- <section id="learn-more">
 <h2>Learn more<a class="headerlink" href="#learn-more" title="Link to this heading">#</a></h2>
 <p>This is just a simple starter to get you started.
