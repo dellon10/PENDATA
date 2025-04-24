@@ -875,7 +875,19 @@ Ambil jarak ke k-terdekat sebagai K-Distance</p>
 <ul>
 <!--   Hasil Perhitungan Manual Data Processing : -->
 </ul>
+    <pre><code>
+    from sklearn.preprocessing import StandardScaler
     
+    scaler = StandardScaler()
+    df_scaled = scaler.fit_transform(df)
+
+    df.head()
+    
+    from google.colab import data_table
+    data_table.enable_dataframe_formatter()
+    
+    df
+    </code></pre>
     <img src="kdp.png" class="logo__image only-light" alt="pri"/>
     <img src="kdp.png" class="logo__image only-dark pst-js-only" alt="pri"/>
 <p>
