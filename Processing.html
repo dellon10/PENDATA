@@ -399,7 +399,10 @@
                 
 <div id="searchbox"></div>
                 <article class="bd-article">
-                  
+ 
+<h2><B>MOHON MAAF JAWABAN UTS ADA DIBAWAH</B></h2>
+<br>
+                 
 <h3>Pre Processing</h3>
 <p>adalah tahap penting yang mencakup beberapa langkah untuk menyiapkan data sebelum dianalisis lebih lanjut</p><br>
 
@@ -833,37 +836,58 @@ Ambil jarak ke k-terdekat sebagai K-Distance</p>
 <br>
 <h2><b>UTS PENDATA :</b></h2>
 <br>
-<h6>Hasil Perhitungan Manual Data Understanding :</h6>
+<h6>1. Hasil Perhitungan Manual Data Understanding :</h6>
 <ul>
   
 </ul>
     <img src="dp.png" class="logo__image only-light" alt="pri"/>
     <img src="dp.png" class="logo__image only-dark pst-js-only" alt="pri"/>
 <br>
-<h6>Hasil Perhitungan Kode Data Understanding : </h6>
+<h6>1.1 Hasil Perhitungan Kode Data Understanding : </h6>
 <ul>
 <!--   Hasil Perhitungan Manual Data Processing : -->
 </ul>
+    <pre><code>
+    from google.colab import drive
+    drive.mount('/content/drive')
+    
+    import pandas as pd
+    
+    file_path = '/content/drive/MyDrive/PENDATA/cirrhosis.csv'
+    
+    df = pd.read_csv(file_path)
+    
+    df.head()
+    
+    from google.colab import data_table
+    data_table.enable_dataframe_formatter()
+    
+    df
+    </code></pre>
+<br>
     <img src="kds.png" class="logo__image only-light" alt="pri"/>
     <img src="kds.png" class="logo__image only-dark pst-js-only" alt="pri"/>
 <p>
   
 </p>
 <br>
-<h6>Hasil Perhitungan Data Preprocessing : </h6>
+<h6>2. Hasil Perhitungan Data Preprocessing : </h6>
 <ul>
 <!--   Hasil Perhitungan Manual Data Processing : -->
 </ul>
+    
     <img src="kdp.png" class="logo__image only-light" alt="pri"/>
     <img src="kdp.png" class="logo__image only-dark pst-js-only" alt="pri"/>
 <p>
   
 </p>
 <br>
-<h6>Hasil Perhitungan Data Modelling : </h6>
+<h6>3. Hasil Perhitungan Data Modelling : </h6>
 <ul>
 <!--   Hasil Perhitungan Manual Data Processing : -->
 </ul>
+    
+<br>
     <img src="m.png" class="logo__image only-light" alt="pri"/>
     <img src="m.png" class="logo__image only-dark pst-js-only" alt="pri"/>
 <p>
