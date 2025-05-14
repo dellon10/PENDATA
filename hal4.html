@@ -1630,7 +1630,7 @@
 
 
                   
-<h3>K-Menans Clustering</h3>
+<h3>K-Means Clustering</h3>
 <p>Pengertian :<br>
 Teknik pengelompokan (clustering) berbasis partisi atau Membagi data menjadi K kelompok berdasarkan jarak dan Setiap kelompok direpresentasikan oleh centroid (rata-rata dari titik dalam kluster)
 </p><br>
@@ -1738,7 +1738,6 @@ Sensitif terhadap Outlier, harus menentukan K dari awal, dipengaruhi oleh skala 
 <br>
 <h5>10. Tentukan kembali nilai Centroid terbaru</h5>
 <ul>
-    <p>disini saya menggunakan k = 4</p>
 </ul>
     <img src="cb.png" class="logo__image only-light" alt="k4"/>
     <img src="cb.png" class="logo__image only-dark pst-js-only" alt="k4"/>
@@ -1756,43 +1755,62 @@ Sensitif terhadap Outlier, harus menentukan K dari awal, dipengaruhi oleh skala 
   
 </p>
 <br>
+<h5>12. Hitung Menggunakan Code</h5>
+<ul>
+    <p>dengan menggunakan library sklearn dan matplotlib untuk menggambarkan plot diagramnya</p>
+</ul>
+<!--     <img src="ha.png" class="logo__image only-light" alt="k4"/>
+    <img src="ha.png" class="logo__image only-dark pst-js-only" alt="k4"/> -->
+<p>
+  
+</p>
+<br>
 <pre><code>
 import pandas as pd
-import numpy as np
-from scipy.spatial.distance import cdist
+from sklearn.cluster import KMeans
+from sklearn.metrics import silhouette_score
+import matplotlib.pyplot as plt
 
-# Baca data dari Excel 
-df = pd.read_excel("/content/drive/My Drive/kombi_iris_final.xlsx")
+#, jd .
+df = pd.read_csv('PENDATA_K-MEANS.csv', delimiter=';')
+df = df.drop(columns=['Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8'])
+for col in ['petal_length', 'petal_width', 'sepal_length', 'sepal_width']:
+    df[col] = df[col].str.replace(',', '.').astype(float)
 
-# Ambil hanya kolom fitur (tanpa ID & Class)
-X = df[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']]
-print(X.head())  # Cek hasilnya
+X = df[['petal_length', 'petal_width', 'sepal_length', 'sepal_width']].values
 
-# Hitung Jarak Euclidean untuk Semua Titik
-distances = cdist(X, X, metric='euclidean')
+# Jalankan KMeans dengan 2 cluster
+kmeans = KMeans(n_clusters=2, random_state=42)
+kmeans.fit(X)
+labels = kmeans.labels_
 
-K = 4  # Ubah jumlah tetangga terdekat menjadi 4
-sorted_distances = np.sort(distances, axis=1)  # Urutkan jarak
-avg_k_nearest = np.mean(sorted_distances[:, 1:K+1], axis=1)  # Ambil rata-rata 4 terdekat
+# Hitung SSE dan Silhouette Score
+sse = kmeans.inertia_
+silhouette = silhouette_score(X, labels)
 
-# Hitung Outlier (Gunakan Mean + 2*Std)
-threshold = np.mean(avg_k_nearest) + 2 * np.std(avg_k_nearest)
-df["Outlier_Score"] = avg_k_nearest
-df["Is_Outlier"] = df["Outlier_Score"] > threshold
+print("SSE:", sse)
+print("Silhouette Score:", silhouette)
 
-# Tampilkan Hasil
-print(df[["id", "Outlier_Score", "Is_Outlier"]])
-
-# Simpan ke Excel
-df.to_excel("hasil_outlierrr.xlsx", index=False)
+# Visualisasi hasil cluster (gunakan 2 fitur: petal_length dan petal_width)
+plt.figure(figsize=(8, 6))
+plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='viridis', s=50)
+plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1],
+            s=100, c='green', marker='X', label='Centroids')
+plt.xlabel('Petal Length')
+plt.ylabel('Petal Width')
+plt.title('Hasil K-Means Clustering (2 Cluster)')
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.show()
 </code></pre>
 <br>
-<h5>12. Lihat hasil outlier pada Excel</h5>
+<h5>13. Hasil perhitungan dengan Code :</h5>
 <ul>
-    <p>apabila hasilnya TRUE maka itu adalah outlier namun jika hasilnya FALSE maka bukan outlier</p>
+<!--     <p>apabila hasilnya TRUE maka itu adalah outlier namun jika hasilnya FALSE maka bukan outlier</p> -->
 </ul>
-    <img src="hasil_ol.png" class="logo__image only-light" alt="hasil_ol"/>
-    <img src="hasil_ol.png" class="logo__image only-dark pst-js-only" alt="hasil_ol"/>
+    <img src="cp.png" class="logo__image only-light" alt="hasil_ol"/>
+    <img src="cp.png" class="logo__image only-dark pst-js-only" alt="hasil_ol"/>
 <p>
   
 </p>
