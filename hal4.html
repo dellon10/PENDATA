@@ -1745,7 +1745,39 @@ Sensitif terhadap Outlier, harus menentukan K dari awal, dipengaruhi oleh skala 
   
 </p>
 <br>
-<h5>11. Ulangi proses Iterasi hingga hasil tetap (tidak berubah) atau Konvergensi tercapai</h5>
+<h5>11. Hitung Shiloutte</h5>
+<ul>
+    <p>a(i) = rata-rata jarak dari titik i ke semua titik dalam cluster-nya sendiri <br>
+
+      b(i) = rata-rata jarak dari titik i ke titik-titik dalam cluster terdekat lainnya<br>
+      
+      Nilai s(i) berkisar antara -1 sampai 1<br>
+
+      Langkah Langkah :<br>
+      1. Hitung jarak euclidean antar data <br>
+      2. Hitung a(i): Rata-rata jarak ke data dalam cluster yang sama <br>
+      3. Hitung b(i): Rata-rata jarak ke cluster terdekat lain <br>
+      4. Hitung s(i): Rumus Silhouette yaitu =(b - a) / MAX(a, b) <br>
+      5. Rata-Ratakan Semua s(i) (=AVERAGE(range_silhouette)) <br>
+
+    </p>
+</ul>
+    <img src="sh.png" class="logo__image only-light" alt="k4"/>
+    <img src="sh.png" class="logo__image only-dark pst-js-only" alt="k4"/>
+<p>
+  
+</p>
+<br>
+<h5>12. Hasil Shiloutte</h5>
+<ul>
+</ul>
+    <img src="hs.png" class="logo__image only-light" alt="k4"/>
+    <img src="hs.png" class="logo__image only-dark pst-js-only" alt="k4"/>
+<p>
+  
+</p>
+<br>
+<h5>13. Ulangi proses Iterasi hingga hasil tetap (tidak berubah) atau Konvergensi tercapai</h5>
 <ul>
     <p>ulangi terus menerus hingga data pada tabel kesimpulan hasilnya sama, disini saya hanya sampai pada Iterasi ke 7 karena telah diperoleh konvergennya</p>
 </ul>
@@ -1755,7 +1787,7 @@ Sensitif terhadap Outlier, harus menentukan K dari awal, dipengaruhi oleh skala 
   
 </p>
 <br>
-<h5>12. Hitung Menggunakan Code</h5>
+<h5>14. Hitung Menggunakan Code</h5>
 <ul>
     <p>dengan menggunakan library sklearn dan matplotlib untuk menggambarkan plot diagramnya</p>
 </ul>
@@ -1805,7 +1837,7 @@ plt.tight_layout()
 plt.show()
 </code></pre>
 <br>
-<h5>13. Hasil perhitungan dengan Code :</h5>
+<h5>15. Hasil perhitungan dengan Code :</h5>
 <ul>
 <!--     <p>apabila hasilnya TRUE maka itu adalah outlier namun jika hasilnya FALSE maka bukan outlier</p> -->
 </ul>
