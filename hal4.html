@@ -400,93 +400,10 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-<h3>Penambangan Data</h3><br>
-<p>Mata kuliah <b>Penambangan Data (Data Mining)</b> membahas teknik dan metode untuk mengekstraksi pengetahuan yang bermanfaat dari kumpulan data yang besar. Mahasiswa akan mempelajari konsep dasar, proses penambangan data, serta berbagai metode seperti klasifikasi, klastering, asosiasi, regresi, dan deteksi anomali</p><br>
-<p>Selain teori, mata kuliah ini menekankan pada penerapan praktis menggunakan perangkat lunak dan algoritma untuk menganalisis data dalam berbagai bidang seperti bisnis, kesehatan, dan teknologi. Hasil dari penambangan data diharapkan dapat membantu dalam pengambilan keputusan berbasis data</p><br>
-<h4>-Macam Macam Tipe Data-</h4>
-<h6>A. Tipe data berdasarkan pengukurannya</h6>
-<p>1. Nominal : Data kategori tanpa urutan tertentu, contoh : (biru,hijau,merah)<br>
-2. Ordinal : Data kategori dengan urutan tertentu, contoh : (tinggi & rendah)<br>
-3. Interval : Data numerik dengan perbedaan bermakna tanpa nol absolut, contoh : (celcius,fahrenheit)<br>
-4. Rasio :  Data numerik dengan nol absolut, sehingga bisa dibandingkan secara proporsional, contoh : (berat badan, tinggi badan & penghasilan)</p>
-
-<h6>B. Tipe data berdasarkan formatnya</h6>
-<p>1. Numerik : Data angka yang bisa dihitung, contoh : (integer & float)<br>
-2. Kategorikal : Data berbentuk kategori atau label, contoh : (pegawai,wirausaha,mahasiswa)</p><br>
-
-<h3>-Materi dan Tugas-</h3><br>
-                  
-<h3>1. Kolekting Data</h3>
-<p>Pengertian :<br>
-Kolekting data (data collection) adalah proses mengumpulkan data dari berbagai sumber untuk dianalisis dalam data mining. Data ini bisa berasal dari survei, sensor, transaksi bisnis dan lainnya</p><br>
-
-<h3>Langkah Langkah Pengerjaan</h3>
-<br>
-<h5>1. !pip install pymysql</h5>
-  <p>!pip install pymysql digunakan untuk Koneksi ke MySQL dengan Python</p>
-<p>
   
 </p>
 <br>
-<h5>2. !pip install psycopg2-binary</h5>
-  <p>!pip install pymysql digunakan untuk Koneksi ke PostgreSQL dengan Python</p>
-<p>
-  
-</p>
-<br>
-<h5>3. !pip install pymysql psycopg2 pandas sqlalchemy</h5>
-  <p>Pandas Untuk membaca, mengolah, dan menyimpan data</p>
-  <p>sqlalchemy Membantu membuat koneksi database dengan lebih mudah</p>
-<p>
-  
-</p>
-<br>
-<h5>4. Masukkan Codenya</h5>
-  <pre><code>
-import pandas as pd
-from sqlalchemy import create_engine
-
-# Koneksi ke MySQL
-mysql_user = "avnadmin"
-mysql_password = "****"
-mysql_host = "mysql-*****-irismysql23126.g.aivencloud.com"
-mysql_port = "19324"
-mysql_db = "defaultdb"
-
-mysql_engine = create_engine(f"mysql+pymysql://{mysql_user}:{mysql_password}@{mysql_host}:{mysql_port}/{mysql_db}")
-
-# Koneksi ke PostgreSQL
-pg_user = "avnadmin"
-pg_password = "****"
-pg_host = "pg-*****-posgrestqlpendata.g.aivencloud.com"
-pg_port = "10517"
-pg_db = "defaultdb"
-
-pg_engine = create_engine(f"postgresql+psycopg2://{pg_user}:{pg_password}@{pg_host}:{pg_port}/{pg_db}")
-
-# Ambil data dari MySQL
-query_mysql = 'SELECT id, "Class", petal_length, petal_width FROM iris_data'
-df_mysql = pd.read_sql(query_mysql, mysql_engine)
-
-# Ambil data dari PostgreSQL (kolom dengan spasi diapit tanda kutip ganda)
-query_pg = 'SELECT id, "Class", "sepal length" AS sepal_length, "sepal width" AS sepal_width FROM posgres'
-df_pg = pd.read_sql(query_pg, pg_engine)
-
-# Gabungkan berdasarkan id dan Class (full outer join)
-df_combined = pd.merge(df_mysql, df_pg, on=["id", "Class"], how="outer")
-
-# Simpan ke CSV
-df_combined.to_csv("combined_iris.csv", index=False)
-
-# Print hasil gabungan
-print(df_combined.to_string(index=False))
-</code></pre>
-<br>
-<p>
-  
-</p>
-<br>
-<h5>5. hasil panggabungan 2 database</h5>
+<h5>Database Iris</h5>
 <br>
 <table border="1" class="dataframe table table-bordered">
   <thead>
@@ -503,10 +420,10 @@ print(df_combined.to_string(index=False))
     <tr>
       <td>1</td>
       <td>Iris-setosa</td>
-      <td>8.4</td>
-      <td>70.0</td>
-      <td>20.1</td>
-      <td>30.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>5.1</td>
+      <td>3.5</td>
     </tr>
     <tr>
       <td>2</td>
@@ -1703,138 +1620,134 @@ print(df_combined.to_string(index=False))
   </tbody>
 </table><br>
 <br>
-    <h5>6. Grafik Plot</h5>
-    <img src="scatterplot.png" class="logo__image only-light" alt="Scatter Plot"/>
-    <img src="scatterplot.png" class="logo__image only-dark pst-js-only" alt="Scatter Plot"/><br>
-<p>
-
-  
-</p>
-<br>
 
 
                   
-<h3>2. Deteksi Outlier</h3>
+<h3>K-Menans Clustering</h3>
 <p>Pengertian :<br>
-Deteksi outlier merupakan proses menemukan data yang berbeda jauh dari data lainnya dalam suatu dataset. Outlier bisa terjadi karena kesalahan input, variasi alami, atau terdapat anomali</p><br>
-
-<h4>Metode K-Nearest Neighbors (KNN)</h4>
-<p>Pengertian :<br>
-K-Nearest Neighbors (KNN) merupakan algoritma machine learning yang digunakan untuk klasifikasi dan regresi berdasarkan kedekatan data (ketetanggaan)</p><br>
-
-<p>Cara Kerja K-Nearest Neighbors (KNN)</p>
-<p>1. Hitung Jarak Antar Data, bisa memakai rumus Euclidean atau Manhattan untuk mengukur kedekatan setiap titik dengan tetangganya</p>
-<h7>A. Euclidean Distance</h7>
-<p>adalah jarak garis lurus antara dua titik dalam ruang</p><br>
-      Rumus :
-    <img src="rumusecludean.png" class="logo__image only-light" alt="rumus ecludean"/>
-    <img src="rumusecludean.png" class="logo__image only-dark pst-js-only" alt="rumus ecludean"/>
-<p></p><br>
-<h7>B. Manhattan Distance</h7>
-<p>adalah jarak yang dihitung berdasarkan jalan lurus ke atas, bawah, kiri atau kanan (seperti berjalan di jalanan kota berbentuk kotak)
-</p>
-      Rumus :
-    <img src="manhattan.png" class="logo__image only-light" alt="rumus manhattan"/>
-    <img src="manhattan.png" class="logo__image only-dark pst-js-only" alt="rumus manhattan"/><br>
-           
-<p></p><br>
-<h7>C. Minkowski Distance</h7>
-<p>adalah jarak yang dihitung dengan Generalisasi euclidean dan Manhattan
-</p>
-2. Menentukan K (jumlah tetangga), Untuk setiap titik cari K data terdekat<br>
-3. Hitung skor Outlier, gunakan perbandingan kepadatan suatu titik dengan tetangganya jika suatu titik memiliki kepadatan yang jauh lebih kecil dari rata-rata tetangganya, kemungkinan itu adalah outlier<br>
+Teknik pengelompokan (clustering) berbasis partisi atau Membagi data menjadi K kelompok berdasarkan jarak dan Setiap kelompok direpresentasikan oleh centroid (rata-rata dari titik dalam kluster)
 </p><br>
 
+<h4>Tujuan :</h4>
+<p>Mengelompokkan objek sehingga :
+<br>
+Objek dalam kluster sehomogen mungkin <br>
+Objek antar kluster seheterogen mungkin <br>
+Meminimalkan variasi dalam kluster (within-cluster variance)
+</p><br>
+
+<h4>Kelebihan dan Kekurangan :</h4>
+<p>Kelebihan :<br>
+cepat dan efisien, lebih mudah dipahami, hasil stabil jika inisialisasi bagus<br>
+Kekurangan :<br>
+Sensitif terhadap Outlier, harus menentukan K dari awal, dipengaruhi oleh skala dan dimensi data
+</p><br>
 
 <h3>Langkah Langkah Pengerjaan</h3>
 <br>
-<h5>1. Masuk ke DBeaver</h5>
-    <img src="dbeaver.png" class="logo__image only-light" alt="dbeaver"/>
-    <img src="dbeaver.png" class="logo__image only-dark pst-js-only" alt="dbeaver"/><br>
+<h5>1. Siapkan Database</h5>
+    <img src="db.png" class="logo__image only-light" alt="db"/>
+    <img src="db.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
 <p>
   
 </p>
 <br>
-<h5>2. Pilih data yang ingin dirubah, disini yaitu tabel data "iris_data"</h5>
-    <img src="pilih_iris.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="pilih_iris.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
+<h5>2. Pilih data yang ingin dijadikan Centroid</h5>
+<ul>
+    <p>disini saya pakai id 10 dan 12</p>
+</ul>
+    <img src="ctr.png" class="logo__image only-light" alt="pilih_iris"/>
+    <img src="ctr.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
 <p>
   
 </p>
 <br>
-<h5>3. Pada id 1 ubah table data menjadi nilai ekstreme</h5>
-    <img src="ubahdata_iris.png" class="logo__image only-light" alt="ubahdata_iris"/>
-    <img src="ubahdata_iris.png" class="logo__image only-dark pst-js-only" alt="ubahdata_iris"/><br>
+<h5>3. Tentukan nilai K</h5>
+<ul>
+    <p>untuk contoh kasus ini saya menggunakan K = 2</p>
+</ul>
+    <img src="nk.png" class="logo__image only-light" alt="nk"/>
+    <img src="nk.png" class="logo__image only-dark pst-js-only" alt="nk"/><br>
 <p>
   
 </p>
 <br>
-<h5>4. Selanjutnya pilih table data "Postgres"</h5>
-    <img src="pilihpostgres.png" class="logo__image only-light" alt="pilihpostgres"/>
-    <img src="pilihpostgres.png" class="logo__image only-dark pst-js-only" alt="pilihpostgres"/><br>
+<h5>4. Selanjutnya lakukan perhitungan pada Cluster (C1 & C2) menggunakan Euclidean Distance</h5>
+<ul>
+    <p>lakukan perhitungan untuk menentukan jarak antar data pada Cluster</p>
+</ul>
+    <img src="rumusecludean.png" class="logo__image only-light" alt="pilihpostgres"/>
+    <img src="rumusecludean.png" class="logo__image only-dark pst-js-only" alt="pilihpostgres"/><br>
 <p>
   
 </p>
 <br>
-<h5>5. Pada id 1 ubah table data menjadi nilai ekstreme</h5>
-     <img src="ubahdata_postgres.png" class="logo__image only-light" alt="ubahdata_postgres"/>
-    <img src="ubahdata_postgres.png" class="logo__image only-dark pst-js-only" alt="ubahdata_postgres"/>
+<h5>5. Hitung jarak minimum antara Cluster</h5>
+<ul>
+    <p>hitung dengan rumus (c1 - c2)</p>
+</ul>
+     <img src="jm.png" class="logo__image only-light" alt="ubahdata_postgres"/>
+    <img src="jm.png" class="logo__image only-dark pst-js-only" alt="ubahdata_postgres"/>
 <p>
   
 </p>
 <br>
-<h5>6. Buka file excel yang sudah ada kombinasi data iris didalamnya</h5>
-     <img src="excel.png" class="logo__image only-light" alt="excel"/>
-    <img src="excel.png" class="logo__image only-dark pst-js-only" alt="excel"/>
+<h5>6. Kemudian kategorikan data berdasarkan nilai jarak minimum data tersebut</h5>
+<ul>
+    <p>disini saya mengkategorikan ke dalam 2 Kluster yaitu Cluster 1 dan Cluster 2</p>
+</ul>
+     <img src="kt.png" class="logo__image only-light" alt="kt"/>
+    <img src="kt.png" class="logo__image only-dark pst-js-only" alt="kt"/>
 <p>
   
 </p>
 <br>
-<h5>7. Pakai rumus Euclidian Distance</h5>
-    <img src="rumusecludean.png" class="logo__image only-light" alt="rumus ecludean"/>
-    <img src="rumusecludean.png" class="logo__image only-dark pst-js-only" alt="rumus ecludean"/>
+<h5>7. Buat tabel kesimpulan yang didalmnya berisi Jumlah data dan anggota berdasarkan Cluster</h5>
+    <img src="ks.png" class="logo__image only-light" alt="rumus ecludean"/>
+    <img src="ks.png" class="logo__image only-dark pst-js-only" alt="rumus ecludean"/>
 <p>
   
 </p>
 <br>
-<h5>8. Masukkan rumus ke Excel</h5>
+<h5>8. Lakukan hingga Iterasi ke 2</h5>
 <ul>
     <p>=SQRT((C3-$C$2)^2 + (D3-$D$2)^2 + (E3-$E$2)^2 + (F3-$F$2)^2)</p>
 </ul>
-    <img src="rumusnya.png" class="logo__image only-light" alt="rumusnya"/>
-    <img src="rumusnya.png" class="logo__image only-dark pst-js-only" alt="rumusnya"/>
+    <img src="i2.png" class="logo__image only-light" alt="rumusnya"/>
+    <img src="i2.png" class="logo__image only-dark pst-js-only" alt="rumusnya"/>
 <p>
   
 </p>
 <br>
-<h5>9. Urutkan hasil perhitungan Euclidean Distance</h5>
+<h5>9. Hitung SSE (Sum Square Error)</h5>
 <ul>
     <p>urutkan hasil semua perhitungan dari yang terkecil hingga terbesar</p>
 </ul>
-    <img src="sort.png" class="logo__image only-light" alt="sort"/>
-    <img src="sort.png" class="logo__image only-dark pst-js-only" alt="sort"/>
+    <img src="sse.png" class="logo__image only-light" alt="sort"/>
+    <img src="sse.png" class="logo__image only-dark pst-js-only" alt="sort"/>
 <p>
   
 </p>
 <br>
-<h5>10. Tentukan K (ketetanggaan)</h5>
+<h5>10. Tentukan kembali nilai Centroid terbaru</h5>
 <ul>
     <p>disini saya menggunakan k = 4</p>
 </ul>
-    <img src="k4.png" class="logo__image only-light" alt="k4"/>
-    <img src="k4.png" class="logo__image only-dark pst-js-only" alt="k4"/>
+    <img src="cb.png" class="logo__image only-light" alt="k4"/>
+    <img src="cb.png" class="logo__image only-dark pst-js-only" alt="k4"/>
 <p>
   
 </p>
 <br>
-<h5>11. Masukkan kode untuk menentukan hasil Outlier</h5>
+<h5>11. Ulangi proses Iterasi hingga hasil tetap (tidak berubah) atau Konvergensi tercapai</h5>
 <ul>
-    <p>Kode ini digunakan untuk menentukan outlier pada data Iris menggunakan metode Euclidean Distance dan menyimpan hasilnya ke dalam file Excel</p><br>
-    <li>pandas untuk membaca dan menyimpan data Excel</li>
-    <li>numpy untuk operasi matematika dan array</li>
-    <li>cdist dari scipy.spatial.distance untuk menghitung jarak Euclidean antar titik data</li>
-    <li>Menambahkan kolom "Is_Outlier" → True jika outlier, False jika bukan outlier</li>
+    <p>ulangi terus menerus hingga data pada tabel kesimpulan hasilnya sama, disini saya hanya sampai pada Iterasi ke 7 karena telah diperoleh konvergennya</p>
 </ul>
+    <img src="ha.png" class="logo__image only-light" alt="k4"/>
+    <img src="ha.png" class="logo__image only-dark pst-js-only" alt="k4"/>
+<p>
+  
+</p>
 <br>
 <pre><code>
 import pandas as pd
