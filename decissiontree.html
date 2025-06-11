@@ -205,6 +205,13 @@
                 </a>
             </li>
         </ul>
+       <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="decissiontree.html">
+                    Decission Tree
+                </a>
+            </li>
+        </ul>
         <ul class="current nav bd-sidenav">
 <!-- <li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li> -->
@@ -419,177 +426,137 @@
 </p>
 <br>
         
-<h3>Fuzzy C-Means</h3>
+<h3>Decission Tree</h3>
 <p>Pengertian :<br>
-adalah salah satu teknik pengelompokan yang termasuk dalam kelompok metode Hard K-Means, FCM menggunakan pendekatan pengelompokan fuzzy, memungkinkan data menjadi anggota dari seluruh kelas atau cluster yang terbentuk dengan derajat keanggotaan berkisar antara 0 hingga 1, Tingkat keanggotaan ini menentukan sejauh mana data hadir dalam suatu kelas atau cluster
+Decission Tree (pohon keputusan) adalah metode klasifikasi atau prediksi yang menyajikan keputusan dalam bentuk pohon bercabang, setiap cabang menunjukkan kondisi (misalnya: suhu ≤ 3000?), dan setiap daun menunjukkan hasil akhir (misalnya: Brown Dwarf)
 </p><br>
 
 <h4>Tujuan :</h4>
-<p>Mengelompokkan data ke dalam beberapa cluster dengan derajat keanggotaan, bukan klasifikasi mutlak atau (soft clustering)
+<p>Membantu pengambilan keputusan berdasarkan aturan sederhana
 </p><br>
 
 <h4>Kelebihan dan Kekurangan :</h4>
 <p>Kelebihan :<br>
-Data bisa menjadi anggota beberapa cluster sekaligus (Soft Clustering), hasil stabil jika inisialisasi bagus<br>
+Mudah dipahami (seperti logika IF-THEN), Tidak butuh normalisasi data, Bisa digunakan untuk data numerik maupun kategori<br>
 Kekurangan :<br>
-Sensitif terhadap Outlier, harus menentukan Cluster dari awal, dipengaruhi oleh skala dan dimensi data
+Mudah overfitting, Sensitif terhadap perubahan kecil pada data, Kurang akurat dibanding model yang lebih kompleks jika data besar
 </p><br>
 
 <h3>Langkah Langkah Pengerjaan</h3>
 <br>
 <h5>1. Siapkan Database</h5>
-    <img src="db_fcm.png" class="logo__image only-light" alt="db"/>
-    <img src="db_fcm.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+    <img src="db_dt.png" class="logo__image only-light" alt="db"/>
+    <img src="db_dt.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
 <p>
   
 </p>
 <br>
-<h5>2. Tentukan Clusternya </h5>
+<h5>2. Tentukan Rendah, Sedang dam Tingginya </h5>
 <ul>
-    <p>disini saya pakai K3</p>
+    <p>disini saya pakai rumus "=IF(data<=1939;"Rendah";IF(data<=2519;"Sedang";"Tinggi"))"</p>
 </ul>
-    <img src="k_fcm.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="k_fcm.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
+    <img src="tsd_dt.png" class="logo__image only-light" alt="pilih_iris"/>
+    <img src="tsd_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
 <p>
   
 </p>
 <br>
-<h5>3. Masukkan nilai uik (k) dan xij (data iris) </h5>
+<h5>3. Lakukan Perhitungan </h5>
 <ul>
-<!--     <p>disini saya pakai K3</p> -->
+    <p>Hitung node 1, dengan cara menentukan jumlah data dan kelas dari setiap data</p>
 </ul>
-    <img src="d_fcm.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="d_fcm.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
+    <img src="h_dt.png" class="logo__image only-light" alt="pilih_iris"/>
+    <img src="h_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
 <p>
   
 </p>
 <br>
-<h5>4. Hitung uik^2 </h5>
+<h5>4. Hitung Entropy </h5>
 <ul>
-    <p>disini saya pakai K3</p>
+    <p>disini saya menggunakan rumus "=((-L26/K26)*IMLOG2(L26/K26)+(-M26/K26)*IMLOG2(M26/K26)+(-N26/K26)*IMLOG2(N26/K26))"</p>
 </ul>
-    <img src="kd_fcm.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="kd_fcm.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
+    <img src="e_dt.png" class="logo__image only-light" alt="pilih_iris"/>
+    <img src="e_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
 <p>
   
 </p>
 <br>
-<h5>5. Hitung uik*xij </h5>
+<h5>5. Hitung Gain </h5>
 <ul>
-    <p>kemudian hitung k dikali dengan keseluruhan data</p>
+    <p>kemudian hitung gain dari semua data dengan rumus "=(O26)-((K29/K26)*O29)-((K30/K26)*O30)-((K31/K26)*O31)"a</p>
 </ul>
-    <img src="kl_fcm.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="kl_fcm.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
+    <img src="g_dt.png" class="logo__image only-light" alt="pilih_iris"/>
+    <img src="g_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
 <p>
   
 </p>
 <br>
-<h5>6. Hitung Total perhitungan uik^2 & uik*xij </h5>
+<h5>6. Lakukan Eliminasi data </h5>
 <ul>
-    <p>proses ini bisa disebut juga sebagai sigma</p>
+    <p>cara menentukan data yang harus dieliminasi adalah dengan membandingkan semua Gain lalu pilih Gain terbesar kemudian pilih kelas yang jumlah Enthropynya 0</p>
 </ul>
-    <img src="t_fcm.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="t_fcm.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
+    <img src="db2_dt.png" class="logo__image only-light" alt="pilih_iris"/>
+    <img src="db2_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
 <p>
   
 </p>
 <br>
-<h5>7. Tentukan Centroid Baru</h5>
+<h5>7. Hitung Node 2</h5>
 <ul>
-    <p>caranya adalah total dari data xij dibagi dengan total dari uik</p>
+    <p>Hitung node 2, dengan cara menentukan jumlah data dan kelas dari setiap data</p>
 </ul>
-    <img src="c_fcm.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="c_fcm.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
+    <img src="n2_dt.png" class="logo__image only-light" alt="pilih_iris"/>
+    <img src="n2_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
 <p>
   
 </p>
 <br>
-<h5>8. Hitung Fungsi Objektif</h5>
+<h5>8. Lakukan Eliminasi Data ke 2</h5>
 <ul>
-    <p>caranya adalah data (xij-centroid baru)^2, hitung semua data hingga k3 lalu total semua hasil perhitungan</p>
+    <p>cara menentukan data yang harus dieliminasi adalah dengan membandingkan semua Gain lalu pilih Gain terbesar kemudian pilih kelas yang jumlah Enthropynya 0</p>
 </ul>
-    <img src="fo_fcm.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="fo_fcm.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
+    <img src="ed2_dt.png" class="logo__image only-light" alt="pilih_iris"/>
+    <img src="ed2_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
 <p>
   
 </p>
 <br>
-<h5>9. Hitung Fungsi Objektif Lanjutan</h5>
+<h5>9. Hitung Node 3</h5>
 <ul>
-    <p>caranya adalah (xij-vik)^2 dan uik(w) lalu kalikan keduanya dan totalkan seluruh data</p>
+    <p>Hitung node 3, dengan cara menentukan jumlah data dan kelas dari setiap data</p>
 </ul>
-    <img src="fol_fcm.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="fol_fcm.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
+    <img src="n3_dt.png" class="logo__image only-light" alt="pilih_iris"/>
+    <img src="n3_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
 <p>
   
 </p>
 <br>
-<h5>10. Tahap Akhir Hitung Fungsi Objektif</h5>
+<h5>10. Perhitungan Terakhir</h5>
 <ul>
-    <p>caranya adalah jumlahkan semua data dari hasil perkalian (xij-vik)^2 dan uik(w)</p>
+    <p>karena data tidak ada yang dieliminasi (tetap)</p>
 </ul>
-    <img src="foa_fcm.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="foa_fcm.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
+    <img src="dt_dt.png" class="logo__image only-light" alt="pilih_iris"/>
+    <img src="dt_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
 <p>
   
 </p>
 <br>
-<h5>11. Hitung ui setiap data pada setiap k</h5>
+<h5>11. Hitung Node 4</h5>
 <ul>
-    <p>caranya adalah hitung (xij-centroid baru)^2 pada semua data</p>
+    <p>Hitung node 4, dengan cara menentukan jumlah data dan kelas dari setiap data</p>
 </ul>
-    <img src="uid_fcm.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="uid_fcm.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
+    <img src="n4_dt.png" class="logo__image only-light" alt="pilih_iris"/>
+    <img src="n4_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
 <p>
   
 </p>
 <br>
-<h5>12. Jumlahkan semua hasil perhitungan ui</h5>
-<ul>
-<!--     <p>caranya adalah jumlahkan semua data dari hasil perkalian (xij-vik)^2 dan uik(w)</p> -->
-</ul>
-    <img src="foa_fcm.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="foa_fcm.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
-<p>
-  
-</p>
-<br>
-<h5>13. Hitung ui1 ui2 dan ui3</h5>
-<ul>
-    <p>caranya adalah total hitung FO dibagi total hitunng ui setiap data</p>
-</ul>
-    <img src="ui_fcm.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="ui_fcm.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
-<p>
-  
-</p>
-<br>
-<h5>14. Tentukan nilai K1, K2 dan K3</h5>
-<ul>
-    <p>didapat dari total perhitungan pada ui1 ui2 dan ui3</p>
-</ul>
-    <img src="tk_fcm.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="tk_fcm.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
-<p>
-  
-</p>
-<br>
-<h5>14. Tentukan nilai K1, K2 dan K3</h5>
-<ul>
-    <p>didapat dari total perhitungan pada ui1 ui2 dan ui3</p>
-</ul>
-    <img src="tk_fcm.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="tk_fcm.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
-<p>
-  
-</p>
-<br>
-<h5>15. Hasil Perhitungan dengan Code</h5>
+<h5>13. Hasil Perhitungan dengan Code</h5>
 <ul>
 <!--     <p>didapat dari total perhitungan pada ui1 ui2 dan ui3</p> -->
 </ul>
-    <img src="cd_fcm.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="cd_fcm.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
+    <img src="cd_dt.png" class="logo__image only-light" alt="pilih_iris"/>
+    <img src="cd_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
 <p>
   
 </p>
