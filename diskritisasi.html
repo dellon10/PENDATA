@@ -212,6 +212,13 @@
                 </a>
             </li>
         </ul>
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="diskritisasi.html">
+                    Diskritisasi Data
+                </a>
+            </li>
+        </ul>
         <ul class="current nav bd-sidenav">
 <!-- <li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li> -->
@@ -428,102 +435,101 @@
         
 <h3>Diskritisasi Data</h3>
 <p>Pengertian :<br>
-Diskritisasi Data (binning) adalah metode klasifikasi atau prediksi yang menyajikan keputusan dalam bentuk pohon bercabang, setiap cabang menunjukkan kondisi (misalnya: suhu ≤ 3000?), dan setiap daun menunjukkan hasil akhir (misalnya: Brown Dwarf)
+Diskritisasi data adalah proses mengubah data numerik (kontinu) menjadi data kategori (diskrit)
 </p><br>
 
 <h4>Tujuan :</h4>
-<p>Membantu pengambilan keputusan berdasarkan aturan sederhana
+<p>Menyederhanakan data agar lebih mudah dipahami, Mempercepat proses perhitungan dalam algoritma tertentu seperti Naive Bayes atau Decision Tree
 </p><br>
 
 <h4>Kelebihan dan Kekurangan :</h4>
 <p>Kelebihan :<br>
-Mudah dipahami (seperti logika IF-THEN), Tidak butuh normalisasi data, Bisa digunakan untuk data numerik maupun kategori<br>
+Lebih mudah dianalisis secara visual dan logika, Berguna untuk algoritma berbasis kategori (contoh: Naive Bayes, ID3)<br>
 Kekurangan :<br>
-Mudah overfitting, Sensitif terhadap perubahan kecil pada data, Kurang akurat dibanding model yang lebih kompleks jika data besar
+Hasilnya bisa bias jika pemilihan batas kategori (binning) tidak tepat, Kehilangan informasi detail (presisi data menurun)
 </p><br>
 
 <h3>Langkah Langkah Pengerjaan</h3>
 <br>
 <h5>1. Siapkan Database</h5>
-    <img src="db_dt.png" class="logo__image only-light" alt="db"/>
-    <img src="db_dt.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+    <img src="db_d.png" class="logo__image only-light" alt="db"/>
+    <img src="db_d.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
 <p>
   
 </p>
 <br>
-<h5>2. Tentukan Rendah, Sedang dam Tingginya </h5>
+<h5>2. Ubah database menjadi kategorikal menggunakan K-Means </h5>
 <ul>
-    <p>disini saya pakai rumus "=IF(data<=1939;"Rendah";IF(data<=2519;"Sedang";"Tinggi"))"</p>
+    <p>tentukan cluster (titik pusat) terlebih dahulu, sebagai cpntoh disini saya hitung fitur petal_length</p>
 </ul>
-    <img src="tsd_dt.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="tsd_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
+    <img src="c_d.png" class="logo__image only-light" alt="pilih_iris"/>
+    <img src="c_d.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
 <p>
-  
 </p>
 <br>
-<h5>3. Lakukan Perhitungan </h5>
+<h5>3. Hitung jarak tiap Cluster </h5>
 <ul>
-    <p>Hitung node 1, dengan cara menentukan jumlah data dan kelas dari setiap data</p>
+    <p>Hitung dengan rumus "=sqrt((data-Centroid)^2)"</p>
 </ul>
-    <img src="h_dt.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="h_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
+    <img src="cd_d.png" class="logo__image only-light" alt="pilih_iris"/>
+    <img src="cd_d.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
 <p>
   
 </p>
 <br>
-<h5>4. Hitung Entropy </h5>
+<h5>4. Hitung Jarak Terdekat dari semua Cluster</h5>
 <ul>
-    <p>disini saya menggunakan rumus "=((-L26/K26)*IMLOG2(L26/K26)+(-M26/K26)*IMLOG2(M26/K26)+(-N26/K26)*IMLOG2(N26/K26))"</p>
+    <p>disini saya menggunakan rumus "=min(data1:data4)"</p>
 </ul>
-    <img src="e_dt.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="e_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
+    <img src="jt_d.png" class="logo__image only-light" alt="pilih_iris"/>
+    <img src="jt_d.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
 <p>
   
 </p>
 <br>
-<h5>5. Hitung Gain </h5>
+<h5>5. Kemudian Tentukan Kategori Data </h5>
 <ul>
-    <p>kemudian hitung gain dari semua data dengan rumus "=(O26)-((K29/K26)*O29)-((K30/K26)*O30)-((K31/K26)*O31)"a</p>
+    <p>saya menggunakan rumus "=CHOOSE(MATCH(G8; C8:F8; 0); "A"; "B"; "C"; "D")", untuk memisahkan menjadi 4 data</p>
 </ul>
-    <img src="g_dt.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="g_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
+    <img src="kt_d.png" class="logo__image only-light" alt="pilih_iris"/>
+    <img src="kt_d.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
 <p>
   
 </p>
 <br>
-<h5>6. Lakukan Eliminasi data </h5>
+<h5>6. Kelompokkan Data Berdasarkan Kategorinya </h5>
 <ul>
-    <p>cara menentukan data yang harus dieliminasi adalah dengan membandingkan semua Gain lalu pilih Gain terbesar kemudian pilih kelas yang jumlah Enthropynya 0</p>
+    <p>Hitung jumlah semua data kemudian kelompokkan kedalam kategorinya masing masing, contoh "=COUNTIF(H8:H157;"A")" ini untuk menghitung berapa banyak Data yang mempunyai kategori A</p>
 </ul>
-    <img src="db2_dt.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="db2_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
+    <img src="kl_d.png" class="logo__image only-light" alt="pilih_iris"/>
+    <img src="kl_d.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
 <p>
   
 </p>
 <br>
-<h5>7. Hitung Node 2</h5>
+<h5>7. Lanjutkan hingga mencapai Konvergen</h5>
 <ul>
-    <p>Hitung node 2, dengan cara menentukan jumlah data dan kelas dari setiap data</p>
+    <p>Hitung juga SSE dengan rumus "=sum(data1:data150)"</p>
 </ul>
-    <img src="n2_dt.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="n2_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
+    <img src="sse_d.png" class="logo__image only-light" alt="pilih_iris"/>
+    <img src="sse_d.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
 <p>
   
 </p>
 <br>
-<h5>8. Lakukan Eliminasi Data ke 2</h5>
+<h5>8. Hentikan Iterasi</h5>
 <ul>
-    <p>cara menentukan data yang harus dieliminasi adalah dengan membandingkan semua Gain lalu pilih Gain terbesar kemudian pilih kelas yang jumlah Enthropynya 0</p>
+    <p>iterasi dihentikan apabila data sudah mencapai konvergen, disini saya hanya sampai pada iterasi ke 10</p>
 </ul>
-    <img src="ed2_dt.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="ed2_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
+    <img src="i10_d.png" class="logo__image only-light" alt="pilih_iris"/>
+    <img src="i10_d.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
 <p>
   
 </p>
 <br>
-<h5>9. Hitung Node 3</h5>
+<h5>9. Hitung Semua Fitur PL, SL, PW, SW</h5>
 <ul>
-    <p>Hitung node 3, dengan cara menentukan jumlah data dan kelas dari setiap data</p>
+    <p>Hitung masing masing fitur lalu ubah jadi kategorikal</p>
 </ul>
     <img src="n3_dt.png" class="logo__image only-light" alt="pilih_iris"/>
     <img src="n3_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
@@ -531,37 +537,76 @@ Mudah overfitting, Sensitif terhadap perubahan kecil pada data, Kurang akurat di
   
 </p>
 <br>
-<h5>10. Perhitungan Terakhir</h5>
+<h5>10. Jadikan data yang sudah di kategorikal menjadi database yang baru</h5>
 <ul>
-    <p>karena data tidak ada yang dieliminasi (tetap)</p>
+    <p>karena data tidak ada yang bersifat numerik, database ini juga bisa disebut sebagai database kategorikal</p>
 </ul>
-    <img src="dt_dt.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="dt_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
+    <img src="dk_d.png" class="logo__image only-light" alt="pilih_iris"/>
+    <img src="dk_d.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
 <p>
   
 </p>
 <br>
-<h5>11. Hitung Node 4</h5>
+<h5>11. Hitung Data Menggunakan Metode Naive Bayes</h5>
 <ul>
-    <p>Hitung node 4, dengan cara menentukan jumlah data dan kelas dari setiap data</p>
+    <p>Hitung prior probability dengan rumus "=count(data per kelas / banyaknya data)", kemudian hitung juga jumlah banyaknya data tiap kelas</p>
 </ul>
-    <img src="n4_dt.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="n4_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
+    <img src="a_nb.png" class="logo__image only-light" alt="pilih_iris"/>
+    <img src="a_nb.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
 <p>
   
 </p>
 <br>
-<h5>13. Hasil Perhitungan dengan Code</h5>
+<h5>12. Hitung Kategorikal Setiap Fitur pada Kelas</h5>
 <ul>
-<!--     <p>didapat dari total perhitungan pada ui1 ui2 dan ui3</p> -->
+    <p>hitung dengan rumus "=COUNTIFS(B4:B154;"Iris-setosa";C4:C154;"A")+1", lakukan pada tiap kelas dan tiap fitur disini contohnya adalah kelas Iris-Setosa</p>
 </ul>
-    <img src="cd_dt.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="cd_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
+    <img src="b_nb.png" class="logo__image only-light" alt="pilih_iris"/>
+    <img src="b_nb.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
 <p>
   
 </p>
 <br>
-
+<h5>13. Hitung Nilai Probabilitas</h5>
+<ul>
+    <p>hitung dengan rumus "=hasil kategorikal/banyaknya data tiap kelas", lakukan pada tiap kelas dan tiap fitur</p>
+</ul>
+    <img src="pb_d.png" class="logo__image only-light" alt="pilih_iris"/>
+    <img src="pb_d.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
+<p>
+  
+</p>
+<br>
+<h5>14. Hitung Nilai Posterior</h5>
+<ul>
+    <p>hitung dengan rumus "=(semua nilai probabilitas * jumlah data tiap kelas)", lakukan pada tiap kelas dan tiap fitur</p>
+</ul>
+    <img src="pt_nb.png" class="logo__image only-light" alt="pilih_iris"/>
+    <img src="pt_nb.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
+<p>
+  
+</p>
+<br>
+<h5>15. Hitung Nilai Akhir</h5>
+<ul>
+    <p>hitung dengan rumus "=(MAX(nilai posterior1:nilai posterior3))", lakukan pada tiap kelas dan tiap fitur</p>
+</ul>
+    <img src="ha_nb.png" class="logo__image only-light" alt="pilih_iris"/>
+    <img src="ha_nb.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
+<p>
+  
+</p>
+<br>
+<h5>16. Hitung Nilai Posterior</h5>
+<ul>
+    <p>hitung dengan rumus "=(semua nilai probabilitas * jumlah data tiap kelas)", lakukan pada tiap kelas dan tiap fitur</p>
+</ul>
+    <img src="pt_nb.png" class="logo__image only-light" alt="pilih_iris"/>
+    <img src="pt_nb.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
+<p>
+  
+</p>
+<br>
 <!-- <section id="learn-more">
 <h2>Learn more<a class="headerlink" href="#learn-more" title="Link to this heading">#</a></h2>
 <p>This is just a simple starter to get you started.
