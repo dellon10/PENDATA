@@ -439,8 +439,7 @@
                   
   
 </p>
-<br>
-        
+                  
 <h2>Prediksi Produktivitas Karyawan Garmen</h2>
 <p>Deskripsi :<br>
 Industri garmen merupakan salah satu contoh utama globalisasi industri di era modern ini, Industri ini merupakan industri yang sangat padat karya dengan banyak proses manual. Memenuhi permintaan global yang besar akan produk garmen sebagian besar bergantung pada kinerja produksi dan pengiriman karyawan di perusahaan manufaktur garmen. Jadi, sangat diharapkan di antara para pengambil keputusan di industri garmen untuk melacak, menganalisis, dan memprediksi kinerja produktivitas tim kerja di pabrik mereka. Kumpulan data ini dapat digunakan untuk tujuan regresi dengan memprediksi rentang produktivitas (0-1) atau untuk tujuan klasifikasi dengan mengubah rentang produktivitas (0-1) menjadi kelas-kelas yang berbeda
@@ -459,8 +458,8 @@ https://archive.ics.uci.edu/dataset/597/productivity+prediction+of+garment+emplo
 <h3>Integrasi Data</h3>
 <p>untuk mengambil data agar dapat diolah, perlu untuk menginstall package yang telah disediakan oleh UCI Dataset. Instalasi dilakukan berguna untuk menarik data yang berasal dari UCI dataset agar dapat diolah. peritah untuk mengambil data dari UCI dataset dapat di lihat ketika menekan tombol import in python pada datase yang diinginkan dan ikuti perintah tersebut agar data dapat diambil dari UCI dataset. Contoh pengambilan data dari UCI dataset dapat dilihat pada gambar dan perintah berikut:
 </p><br>
-    <img src="db_d.png" class="logo__image only-light" alt="db"/>
-    <img src="db_d.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+    <img src="ds_pa_d.png" class="logo__image only-light" alt="db"/>
+    <img src="ds_pa.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
 <br>
 <pre><code>pip install ucimlrepo</code></pre><br>
 <pre><code>from ucimlrepo import fetch_ucirepo 
@@ -701,9 +700,32 @@ Malignant (4)       0.96      0.88      0.92        58
     macro avg       0.94      0.93      0.93       137
  weighted avg       0.94      0.93      0.93       137</code></pre><br>
 
+<h3>Evaluasi Model</h3>
+<p>disini saya menggunakan 3 jenis method untuk modelling yaitu Decission Tree, KNN dan SVM</p><br>
+<p>Decission Tree :<br>
+  Decission Tree (pohon keputusan) adalah metode klasifikasi atau prediksi yang menyajikan keputusan dalam bentuk pohon bercabang</p><br>
+<p>Kelebihan dan Kekurangan :<br>
+Kelebihan :<br>
+Mudah dipahami (seperti logika IF-THEN), Tidak butuh normalisasi data, Bisa digunakan untuk data numerik maupun kategori<br>
+Kekurangan :<br>
+Mudah overfitting, Sensitif terhadap perubahan kecil pada data, Kurang akurat dibanding model yang lebih kompleks jika data besar<br>
+</p>
+<p>Perhitungan :<br>
+1. Hitung Entrophy<br>
+    <img src="n_pu.png" class="logo__image only-light" alt="db"/>
+    <img src="n_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+2. Information Gain<br>
+    <img src="ig_pu.png" class="logo__image only-light" alt="db"/>
+    <img src="ig_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+3. Gain Ratio<br>
+    <img src="gr_pu.png" class="logo__image only-light" alt="db"/>
+    <img src="gr_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+4. Gini Index<br>
+    <img src="gi_pu.png" class="logo__image only-light" alt="db"/>
+    <img src="gi_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+</p><br>
 
-<h3>>Evaluasi Model :</h3>
-<p>Decission Tree</p><br>
+<p>Penerapan</p><br>
 <pre><code>from ucimlrepo import fetch_ucirepo
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -758,33 +780,139 @@ plt.ylabel("Aktual")
 plt.tight_layout()
 plt.show()
 </code></pre><br>
-
-<h3>Evaluasi Model</h3>
-<p>disini saya menggunakan 3 jenis method untuk modelling yaitu Decission Tree, KNN dan SVM</p><br>
-<p>Decission Tree :<br>
-  Decission Tree (pohon keputusan) adalah metode klasifikasi atau prediksi yang menyajikan keputusan dalam bentuk pohon bercabang</p><br>
-<p>Kelebihan dan Kekurangan :<br>
-Kelebihan :<br>
-Mudah dipahami (seperti logika IF-THEN), Tidak butuh normalisasi data, Bisa digunakan untuk data numerik maupun kategori<br>
-Kekurangan :<br>
-Mudah overfitting, Sensitif terhadap perubahan kecil pada data, Kurang akurat dibanding model yang lebih kompleks jika data besar<br>
-</p>
-<p>Perhitungan :<br>
-1. Hitung Entrophy<br>
-    <img src="e_pu.png" class="logo__image only-light" alt="db"/>
-    <img src="e_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
-2. Information Gain<br>
-    <img src="ig_pu.png" class="logo__image only-light" alt="db"/>
-    <img src="ig_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
-3. Gain Ratio<br>
-    <img src="db_d.png" class="logo__image only-light" alt="db"/>
-    <img src="db_d.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
-4. Gini Index<br>
-    <img src="db_d.png" class="logo__image only-light" alt="db"/>
-    <img src="db_d.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
-</p>
-
+    <img src="dt_pu.png" class="logo__image only-light" alt="db"/>
+    <img src="dt_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
                 
+
+<p>K-Nearest Neighbors (KNN)<br>
+Langkah-langkah KNN :<br>
+Tentukan jumlah tetangga (K) yang akan digunakan untuk pertimbangan penentuan kelas (metode cross validation)<br>
+Hitung jarak dari data baru ke masing-masing data point di dataset (eulidien distance)<br>
+Ambil tetangga terdekat menurut K, kemudian hitung rata-ratanya<br>
+</p>
+<p>Penerapan</p><br>
+<pre><code>from ucimlrepo import fetch_ucirepo
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Ambil dataset
+dataset = fetch_ucirepo(id=15)
+X = dataset.data.features.copy()
+y = dataset.data.targets.copy()
+
+# Bersihkan kolom Bare_nuclei
+if X['Bare_nuclei'].dtype == 'object':
+    X['Bare_nuclei'] = pd.to_numeric(X['Bare_nuclei'], errors='coerce')
+X = X.dropna()
+y = y.loc[X.index]
+
+# Normalisasi (WAJIB untuk KNN)
+scaler = StandardScaler()
+X_scaled = pd.DataFrame(scaler.fit_transform(X), columns=X.columns)
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(
+    X_scaled, y, test_size=0.2, random_state=42
+)
+
+# Model KNN (default k=5)
+knn_model = KNeighborsClassifier(n_neighbors=5)
+knn_model.fit(X_train, y_train)
+
+# Prediksi
+y_pred = knn_model.predict(X_test)
+
+# Evaluasi
+print("=== K-Nearest Neighbors Classifier ===")
+print(f"Akurasi: {accuracy_score(y_test, y_pred):.4f}")
+print("Classification Report:")
+print(classification_report(y_test, y_pred, target_names=["Benign (2)", "Malignant (4)"]))
+
+# Confusion Matrix
+cm = confusion_matrix(y_test, y_pred)
+plt.figure(figsize=(4, 3))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+            xticklabels=["Benign", "Malignant"],
+            yticklabels=["Benign", "Malignant"])
+plt.title("Confusion Matrix: KNN")
+plt.xlabel("Prediksi")
+plt.ylabel("Aktual")
+plt.tight_layout()
+plt.show()</code></pre><br>
+<p>Hasil</p>
+    <img src="knn_pu.png" class="logo__image only-light" alt="db"/>
+    <img src="knn_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+
+
+
+<p>Support Vector Machine (SVM)<br>
+Langkah-langkah SVM :<br>
+Plot titik titik<br>
+Cari Garis tengah antara 2 kelas, ambil titik tengah mwnggunakan euclidean distance<br>
+Garis pemisah tegak lurus garis penghubung A–C<br>
+</p>
+<p>Penerapan :</p>
+<pre><code>from ucimlrepo import fetch_ucirepo
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Ambil dataset
+dataset = fetch_ucirepo(id=15)
+X = dataset.data.features.copy()
+y = dataset.data.targets.copy()
+
+# Bersihkan kolom Bare_nuclei
+if X['Bare_nuclei'].dtype == 'object':
+    X['Bare_nuclei'] = pd.to_numeric(X['Bare_nuclei'], errors='coerce')
+X = X.dropna()
+y = y.loc[X.index]
+
+# Normalisasi (WAJIB untuk SVM)
+scaler = StandardScaler()
+X_scaled = pd.DataFrame(scaler.fit_transform(X), columns=X.columns)
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(
+    X_scaled, y, test_size=0.2, random_state=42
+)
+
+# Model SVM (kernel default: RBF)
+svm_model = SVC(kernel='rbf', C=1.0, gamma='scale')  # Bisa coba 'linear', 'poly', dll
+svm_model.fit(X_train, y_train)
+
+# Prediksi
+y_pred = svm_model.predict(X_test)
+
+# Evaluasi
+print("=== Support Vector Machine Classifier ===")
+print(f"Akurasi: {accuracy_score(y_test, y_pred):.4f}")
+print("Classification Report:")
+print(classification_report(y_test, y_pred, target_names=["Benign (2)", "Malignant (4)"]))
+
+# Confusion Matrix
+cm = confusion_matrix(y_test, y_pred)
+plt.figure(figsize=(4, 3))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+            xticklabels=["Benign", "Malignant"],
+            yticklabels=["Benign", "Malignant"])
+plt.title("Confusion Matrix: SVM")
+plt.xlabel("Prediksi")
+plt.ylabel("Aktual")
+plt.tight_layout()
+plt.show()</code></pre><br>
+<p>Hasil :</p><br>
+    <img src="svm_pu.png" class="logo__image only-light" alt="db"/>
+    <img src="svm_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
 
 <!-- <section id="learn-more">
 <h2>Learn more<a class="headerlink" href="#learn-more" title="Link to this heading">#</a></h2>
