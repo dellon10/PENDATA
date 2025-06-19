@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 
 
@@ -564,7 +562,7 @@ missing_percent = (missing_count / X.shape[0]) * 100
 missing_summary = pd.DataFrame({
     'Jumlah Missing': missing_count,
     'Persentase (%)': missing_percent
-}).query("`Jumlah Missing` > 0")</code></pre><br>
+}).query("`Jumlah Missing` > 0")</code></pre>
 
 <h4>Output :</h4>
 
@@ -581,7 +579,7 @@ for column in X.select_dtypes(include=['float64', 'int64']).columns:
     lower_bound = Q1 - 1.5 * IQR
     upper_bound = Q3 + 1.5 * IQR
     outliers = X[(X[column] < lower_bound) | (X[column] > upper_bound)]
-    outlier_counts[column] = len(outliers)</code></pre><br>
+    outlier_counts[column] = len(outliers)</code></pre>
 
 <h4>Output :</h4>
 
@@ -627,7 +625,9 @@ print(X_minmax.head())
 
 print("\n=== Contoh Data Normalisasi Standard (Z-score) ===")
 print(X_standard.head())</code></pre>
-                                                                                                                                                                      
+<h4>Hasil</h4>
+    <img src="n_pu.png" class="logo__image only-light" alt="db"/>
+    <img src="n_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>                                                                                                                                                                     
 
 <h3>Klasifikasi :</h3>
 <p>Klasifikasi menggunakan Method Decission Tree</p>
@@ -780,17 +780,21 @@ plt.ylabel("Aktual")
 plt.tight_layout()
 plt.show()
 </code></pre><br>
+<p>Hasil</p>
     <img src="dt_pu.png" class="logo__image only-light" alt="db"/>
     <img src="dt_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
                 
+<p>
 
+  
+</p>
 <p>K-Nearest Neighbors (KNN)<br>
 Langkah-langkah KNN :<br>
 Tentukan jumlah tetangga (K) yang akan digunakan untuk pertimbangan penentuan kelas (metode cross validation)<br>
 Hitung jarak dari data baru ke masing-masing data point di dataset (eulidien distance)<br>
 Ambil tetangga terdekat menurut K, kemudian hitung rata-ratanya<br>
 </p>
-<p>Penerapan</p><br>
+<p>Penerapan</p>
 <pre><code>from ucimlrepo import fetch_ucirepo
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -847,9 +851,10 @@ plt.show()</code></pre><br>
 <p>Hasil</p>
     <img src="knn_pu.png" class="logo__image only-light" alt="db"/>
     <img src="knn_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+<p>
 
-
-
+  
+</p>
 <p>Support Vector Machine (SVM)<br>
 Langkah-langkah SVM :<br>
 Plot titik titik<br>
@@ -910,7 +915,7 @@ plt.xlabel("Prediksi")
 plt.ylabel("Aktual")
 plt.tight_layout()
 plt.show()</code></pre><br>
-<p>Hasil :</p><br>
+<p>Hasil :</p>
     <img src="svm_pu.png" class="logo__image only-light" alt="db"/>
     <img src="svm_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
 
