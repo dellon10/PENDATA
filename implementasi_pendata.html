@@ -566,8 +566,12 @@ missing_summary = pd.DataFrame({
     'Jumlah Missing': missing_count,
     'Persentase (%)': missing_percent
 }).query("`Jumlah Missing` > 0")</code></pre><br>
-    <img src="db_d.png" class="logo__image only-light" alt="db"/>
-    <img src="db_d.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+
+<h4>Output :</h4>
+
+<pre><code>=== KESIMPULAN: MISSING VALUE ===
+             Jumlah Missing  Persentase (%)
+Bare_nuclei              16        2.288984</code></pre><br>
 
 <pre><code># 4. Deteksi Outlier (IQR Method)
 outlier_counts = {}
@@ -579,11 +583,19 @@ for column in X.select_dtypes(include=['float64', 'int64']).columns:
     upper_bound = Q3 + 1.5 * IQR
     outliers = X[(X[column] < lower_bound) | (X[column] > upper_bound)]
     outlier_counts[column] = len(outliers)</code></pre><br>
-    <img src="db_d.png" class="logo__image only-light" alt="db"/>
-    <img src="db_d.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+
+<h4>Output :</h4>
+
+<pre><code>=== KESIMPULAN: OUTLIER ===
+                             Jumlah Outlier
+Mitoses                                 120
+Normal_nucleoli                          77
+Marginal_adhesion                        60
+Single_epithelial_cell_size              54
+Bland_chromatin                          20</code></pre><br>
 
 <h3>Pre Processing Data</h3>
-<p>Semua fitur bernilai 1–10, kecuali kolom Bare_nuclei, yang bisa lebih tinggi karena hasil konversi dari data aslinya hasilnya akan lebih aman jika dinormalisasi, berikut ini adalah code untuk menormalisasi daa </p><br>
+<p>Semua fitur bernilai 1–10, kecuali kolom Bare_nuclei, yang bisa lebih tinggi karena hasil konversi dari data aslinya hasilnya akan lebih aman jika dinormalisasi, berikut ini adalah code untuk menormalisasi data </p><br>
 <pre><code># Install jika diperlukan:
 # !pip install ucimlrepo pandas scikit-learn
 
@@ -618,22 +630,83 @@ print("\n=== Contoh Data Normalisasi Standard (Z-score) ===")
 print(X_standard.head())</code></pre>
                                                                                                                                                                       
 
+<h3>Klasifikasi :</h3>
+<p>Klasifikasi menggunakan Method Decission Tree</p>
+<pre><code># Install jika diperlukan:
+# !pip install ucimlrepo pandas scikit-learn matplotlib seaborn graphviz
+
+from ucimlrepo import fetch_ucirepo
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# 1. Ambil dataset
+dataset = fetch_ucirepo(id=15)
+X = dataset.data.features.copy()
+y = dataset.data.targets.copy()
+
+# 2. Bersihkan data: konversi 'Bare_nuclei' dan hapus NaN
+if X['Bare_nuclei'].dtype == 'object':
+    X['Bare_nuclei'] = pd.to_numeric(X['Bare_nuclei'], errors='coerce')
+
+X = X.dropna()
+y = y.loc[X.index]  # Samakan index setelah drop
+
+# 3. Split data
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# 4. Buat dan latih model Decision Tree
+clf = DecisionTreeClassifier(random_state=42)
+clf.fit(X_train, y_train)
+
+# 5. Prediksi
+y_pred = clf.predict(X_test)
+
+# 6. Evaluasi
+print("=== Akurasi ===")
+print(accuracy_score(y_test, y_pred))
+
+print("\n=== Classification Report ===")
+print(classification_report(y_test, y_pred, target_names=["Benign (2)", "Malignant (4)"]))
+
+# 7. Confusion Matrix
+cm = confusion_matrix(y_test, y_pred)
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=["Benign", "Malignant"], yticklabels=["Benign", "Malignant"])
+plt.xlabel("Prediksi")
+plt.ylabel("Aktual")
+plt.title("Confusion Matrix - Decision Tree")
+plt.show()
+
+# 8. Visualisasi Pohon Keputusan
+plt.figure(figsize=(20, 10))
+plot_tree(clf, feature_names=X.columns, class_names=["Benign", "Malignant"], filled=True, rounded=True)
+plt.title("Visualisasi Pohon Keputusan")
+plt.show()</code></pre><br>
 
 
-
-
-
-
+<h4>Output :</h4>
                   
-<h3>Langkah Langkah Pengerjaan</h3>
-<br>
-<h5>1. Siapkan Database</h5>
-    <img src="db_d.png" class="logo__image only-light" alt="db"/>
-    <img src="db_d.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
-<p>
-  
-</p>
-<br>
+<pre><code>=== Classification Report ===
+               precision    recall  f1-score   support
+
+   Benign (2)       0.92      0.97      0.94        79
+Malignant (4)       0.96      0.88      0.92        58
+
+     accuracy                           0.93       137
+    macro avg       0.94      0.93      0.93       137
+ weighted avg       0.94      0.93      0.93       137</code></pre><br>
+
+
+
+
+
+
+                
 
 <!-- <section id="learn-more">
 <h2>Learn more<a class="headerlink" href="#learn-more" title="Link to this heading">#</a></h2>
