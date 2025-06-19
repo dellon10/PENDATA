@@ -441,22 +441,103 @@
 </p>
 <br>
         
-<h3>Diskritisasi Data</h3>
-<p>Pengertian :<br>
-Diskritisasi data adalah proses mengubah data numerik (kontinu) menjadi data kategori (diskrit)
+<h2>Prediksi Produktivitas Karyawan Garmen</h2>
+<p>Deskripsi :<br>
+Industri garmen merupakan salah satu contoh utama globalisasi industri di era modern ini, Industri ini merupakan industri yang sangat padat karya dengan banyak proses manual. Memenuhi permintaan global yang besar akan produk garmen sebagian besar bergantung pada kinerja produksi dan pengiriman karyawan di perusahaan manufaktur garmen. Jadi, sangat diharapkan di antara para pengambil keputusan di industri garmen untuk melacak, menganalisis, dan memprediksi kinerja produktivitas tim kerja di pabrik mereka. Kumpulan data ini dapat digunakan untuk tujuan regresi dengan memprediksi rentang produktivitas (0-1) atau untuk tujuan klasifikasi dengan mengubah rentang produktivitas (0-1) menjadi kelas-kelas yang berbeda
 </p><br>
+
+
+<h3>Data Understanding</h3>
+<p>Dataset didapat dari sumber ini :<br>
+https://archive.ics.uci.edu/dataset/597/productivity+prediction+of+garment+employees<br>
+</p>
 
 <h4>Tujuan :</h4>
-<p>Menyederhanakan data agar lebih mudah dipahami, Mempercepat proses perhitungan dalam algoritma tertentu seperti Naive Bayes atau Decision Tree
+<p>untuk menghitung prediksi produksi karyawan garmen
 </p><br>
 
-<h4>Kelebihan dan Kekurangan :</h4>
-<p>Kelebihan :<br>
-Lebih mudah dianalisis secara visual dan logika, Berguna untuk algoritma berbasis kategori (contoh: Naive Bayes, ID3)<br>
-Kekurangan :<br>
-Hasilnya bisa bias jika pemilihan batas kategori (binning) tidak tepat, Kehilangan informasi detail (presisi data menurun)
+<h3>Integrasi Data</h3>
+<p>untuk mengambil data agar dapat diolah, perlu untuk menginstall package yang telah disediakan oleh UCI Dataset. Instalasi dilakukan berguna untuk menarik data yang berasal dari UCI dataset agar dapat diolah. peritah untuk mengambil data dari UCI dataset dapat di lihat ketika menekan tombol import in python pada datase yang diinginkan dan ikuti perintah tersebut agar data dapat diambil dari UCI dataset. Contoh pengambilan data dari UCI dataset dapat dilihat pada gambar dan perintah berikut:
 </p><br>
+    <img src="db_d.png" class="logo__image only-light" alt="db"/>
+    <img src="db_d.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+<br>
+<pre><code>pip install ucimlrepo</code></pre><br>
+<pre><code>from ucimlrepo import fetch_ucirepo 
+  
+# fetch dataset 
+breast_cancer_wisconsin_original = fetch_ucirepo(id=15) 
+  
+# data (as pandas dataframes) 
+X = breast_cancer_wisconsin_original.data.features 
+y = breast_cancer_wisconsin_original.data.targets 
+  
+# metadata 
+print(breast_cancer_wisconsin_original.metadata) 
+  
+# variable information 
+print(breast_cancer_wisconsin_original.variables) 
+</code></pre><br>
 
+<h3>Eksplorasi Data</h3>
+<p>untuk memunculkan contoh data bisa menggunakan code ini :</p>
+<pre><code>from ucimlrepo import fetch_ucirepo
+import pandas as pd
+
+# Fetch dataset
+breast_cancer_wisconsin_original = fetch_ucirepo(id=15)
+
+# Data (as pandas dataframes)
+X = breast_cancer_wisconsin_original.data.features
+y = breast_cancer_wisconsin_original.data.targets
+
+# Tampilkan metadata
+print("=== Metadata ===")
+print(breast_cancer_wisconsin_original.metadata)
+
+# Tampilkan informasi variabel
+print("\n=== Informasi Variabel ===")
+print(breast_cancer_wisconsin_original.variables)
+
+# Tampilkan beberapa baris pertama dari data fitur
+print("\n=== Data Fitur (X) ===")
+print(X.head())
+
+# Tampilkan beberapa baris pertama dari target
+print("\n=== Target (y) ===")
+print(y.head())
+</code></pre><br>
+
+                
+<p>untuk memunculkan distribusi fiur data bisa menggunakan code ini :</p>
+<pre><code>from ucimlrepo import fetch_ucirepo
+import pandas as pd
+
+# Fetch dataset
+breast_cancer_wisconsin_original = fetch_ucirepo(id=15)
+
+# Data (as pandas dataframes)
+X = breast_cancer_wisconsin_original.data.features
+y = breast_cancer_wisconsin_original.data.targets
+
+# Tampilkan metadata
+print("=== Metadata ===")
+print(breast_cancer_wisconsin_original.metadata)
+
+# Tampilkan informasi variabel
+print("\n=== Informasi Variabel ===")
+print(breast_cancer_wisconsin_original.variables)
+
+# Tampilkan beberapa baris pertama dari data fitur
+print("\n=== Data Fitur (X) ===")
+print(X.head())
+
+# Tampilkan beberapa baris pertama dari target
+print("\n=== Target (y) ===")
+print(y.head())
+</code></pre><br>
+
+                  
 <h3>Langkah Langkah Pengerjaan</h3>
 <br>
 <h5>1. Siapkan Database</h5>
@@ -466,308 +547,7 @@ Hasilnya bisa bias jika pemilihan batas kategori (binning) tidak tepat, Kehilang
   
 </p>
 <br>
-<h5>2. Ubah database menjadi kategorikal menggunakan K-Means </h5>
-<ul>
-    <p>tentukan cluster (titik pusat) terlebih dahulu, sebagai cpntoh disini saya hitung fitur petal_length</p>
-</ul>
-    <img src="c_d.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="c_d.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
-<p>
-</p>
-<br>
-<h5>3. Hitung jarak tiap Cluster </h5>
-<ul>
-    <p>Hitung dengan rumus "=sqrt((data-Centroid)^2)"</p>
-</ul>
-    <img src="cl_d.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="cl_d.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
-<p>
-  
-</p>
-<br>
-<h5>4. Hitung Jarak Terdekat dari semua Cluster</h5>
-<ul>
-    <p>disini saya menggunakan rumus "=min(data1:data4)"</p>
-</ul>
-    <img src="jt_d.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="jt_d.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
-<p>
-  
-</p>
-<br>
-<h5>5. Kemudian Tentukan Kategori Data </h5>
-<ul>
-    <p>saya menggunakan rumus "=CHOOSE(MATCH(G8; C8:F8; 0); "A"; "B"; "C"; "D")", untuk memisahkan menjadi 4 data</p>
-</ul>
-    <img src="kt_d.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="kt_d.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
-<p>
-  
-</p>
-<br>
-<h5>6. Kelompokkan Data Berdasarkan Kategorinya </h5>
-<ul>
-    <p>Hitung jumlah semua data kemudian kelompokkan kedalam kategorinya masing masing, contoh "=COUNTIF(H8:H157;"A")" ini untuk menghitung berapa banyak Data yang mempunyai kategori A</p>
-</ul>
-    <img src="kl_d.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="kl_d.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
-<p>
-  
-</p>
-<br>
-<h5>7. Lanjutkan hingga mencapai Konvergen</h5>
-<ul>
-    <p>Hitung juga SSE dengan rumus "=sum(data1:data150)"</p>
-</ul>
-    <img src="sse_d.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="sse_d.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
-<p>
-  
-</p>
-<br>
-<h5>8. Hentikan Iterasi</h5>
-<ul>
-    <p>iterasi dihentikan apabila data sudah mencapai konvergen, disini saya hanya sampai pada iterasi ke 10</p>
-</ul>
-    <img src="i10_d.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="i10_d.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
-<p>
-  
-</p>
-<br>
-<h5>9. Hitung Semua Fitur PL, SL, PW, SW</h5>
-<ul>
-    <p>Hitung masing masing fitur lalu ubah jadi kategorikal</p>
-</ul>
-<!--     <img src="n3_dt.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="n3_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br> -->
-<p>
-  
-</p>
-<br>
-<h5>10. Jadikan data yang sudah di kategorikal menjadi database yang baru</h5>
-<ul>
-    <p>karena data tidak ada yang bersifat numerik, database ini juga bisa disebut sebagai database kategorikal</p>
-</ul>
-    <img src="dk_d.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="dk_d.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
-<p>
-  
-</p>
-<br>
-<h5>11. Hitung Data Menggunakan Metode Naive Bayes</h5>
-<ul>
-    <p>Hitung prior probability dengan rumus "=count(data per kelas / banyaknya data)", kemudian hitung juga jumlah banyaknya data tiap kelas</p>
-</ul>
-    <img src="a_nb.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="a_nb.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
-<p>
-  
-</p>
-<br>
-<h5>12. Hitung Kategorikal Setiap Fitur pada Kelas</h5>
-<ul>
-    <p>hitung dengan rumus "=COUNTIFS(B4:B154;"Iris-setosa";C4:C154;"A")+1", lakukan pada tiap kelas dan tiap fitur disini contohnya adalah kelas Iris-Setosa</p>
-</ul>
-    <img src="b_nb.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="b_nb.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
-<p>
-  
-</p>
-<br>
-<h5>13. Hitung Nilai Probabilitas</h5>
-<ul>
-    <p>hitung dengan rumus "=hasil kategorikal/banyaknya data tiap kelas", lakukan pada tiap kelas dan tiap fitur</p>
-</ul>
-    <img src="pb_d.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="pb_d.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
-<p>
-  
-</p>
-<br>
-<h5>14. Hitung Nilai Posterior</h5>
-<ul>
-    <p>hitung dengan rumus "=(semua nilai probabilitas * jumlah data tiap kelas)", lakukan pada tiap kelas dan tiap fitur</p>
-</ul>
-    <img src="pt_nb.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="pt_nb.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
-<p>
-  
-</p>
-<br>
-<h5>15. Hitung Nilai Akhir</h5>
-<ul>
-    <p>hitung dengan rumus "=(MAX(nilai posterior1:nilai posterior3))", lakukan pada tiap kelas dan tiap fitur</p>
-</ul>
-    <img src="ha_nb.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="ha_nb.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
-<p>
-  
-</p>
-<br>
-<h5>16. Hitung Nilai Posterior</h5>
-<ul>
-    <p>hitung dengan rumus "=(semua nilai probabilitas * jumlah data tiap kelas)", lakukan pada tiap kelas dan tiap fitur</p>
-</ul>
-    <img src="pt_nb.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="pt_nb.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
-<p>
-  
-</p>
-<br>
-<h5>17. Hasil Akhir</h5>
-<ul>
-    <p>Hasil Akhir Perhitungan Manual</p>
-</ul>
-    <img src="ha_nb.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="ha_nb.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
-<p>
-  
-</p>
-<br>
-<h5>18. Perhitungan Dengan Code</h5>
-<ul>
-    <p>Hasil perhitungan dengan Code</p>
-</ul>
-    <img src="hc1_nb.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="hc1_nb.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
-    <img src="hc2.nb.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="hc2.nb.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
-<p>
-  
-</p>
-<br>
-<h5>19. Perhitungan Menggunakan Metode Decission Tree</h5>
-<ul>
-    <p>gunakan database yang sudah di kategorikal</p>
-</ul>
-    <img src="db_d.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="db_d.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
-<p>
-  
-</p>
-<br>
-<h5>20. Hitung Total Data</h5>
-<ul>
-    <p>hitung keseluruhan data yang ada</p>
-</ul>
-<!--     <img src="db_d.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="db_d.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br> -->
-<p>
-  
-</p>
-<br>
-<h5>21. Bagi menjadi 3 Kelas</h5>
-<ul>
-    <p>Bagi menjadi 3 kelas yaitu 0,1 dan 2</p>
-</ul>
-<!--     <img src="db_d.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="db_d.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br> -->
-<p>
-  
-</p>
-<br>
-<h5>22. Hitung Enthropy</h5>
-<ul>
-    <p>hitung dengn rumus "=((-N7/M7)*IMLOG2(N7/M7)+(-O7/M7)*IMLOG2(O7/M7)+(-P7/M7)*IMLOG2(P7/M7))"</p>
-</ul>
-<!--     <img src="db_d.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="db_d.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br> -->
-<p>
-  
-</p>
-<br>
-<h5>23. Hitung Setiap Fitur Pada Setiap Kelas</h5>
-<ul>
-    <p>hitung dengn rumus "=COUNTIF(C5:C155; "A")" supaya lebih cepat dikarenakan terdapat 150 data</p>
-</ul>
-    <img src="1_dt.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="1_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
-<p>
-  
-</p>
-<br>
-<h5>24. Hitung Jumlah Data Pada Setiap Main</h5>
-<ul>
-    <p>hitung dengn rumus "=COUNTIFS(C5:C155; "A"; G5:G155; 0)"</p>
-</ul>
-    <img src="m_dt.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="m_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
-<p>
-  
-</p>
-<br>
-<h5>25. Hitung Gain</h5>
-<ul>
-    <p>hitung dengn rumus "=(Q7)-((M10/M7)*Q10)-((M11/M7)*Q11)-((M12/M7)*Q12)-((M13/M7)*Q13)"</p>
-</ul>
-    <img src="3_dt.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="3_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
-<p>
-  
-</p>
-<br>
-<h5>26. Hitung Semua Data</h5>
-<ul>
-    <p>lakukan perhitungan hingga semua data</p>
-</ul>
-<!--     <img src="3_dt.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="3_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br> -->
-<p>
-  
-</p>
-<br>
-<h5>27. Pilih Nilai Gain Terbesar</h5>
-<ul>
-    <p>Kemudian lakukan eliminasi pada nilai Entrophy pada data tersebut</p>
-</ul>
-<!--     <img src="3_dt.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="3_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br> -->
-<p>
-  
-</p>
-<br>
-<h5>28. Data Baru</h5>
-<ul>
-    <p>setelah dieliminasi maka akan mendapatkan database baru </p>
-</ul>
-    <img src="4_dt.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="4_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
-<p>
-  
-</p>
-<br>
-<h5>29. Hitung Data Baru</h5>
-<ul>
-    <p>setelah mendapatkan data baru hitung seperti Node 1</p>
-</ul>
-<!--     <img src="4_dt.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="4_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br> -->
-<p>
-  
-</p>
-<br>
-<h5>30. Hasil akhir</h5>
-<ul>
-    <p>setelah menghitung Node 2, proses perhitungan berhenti apabila data sudah tidak bisa di eliminasi lagi</p>
-</ul>
-    <img src="6_dt.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="6_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br>
-<p>
-  
-</p>
-<br>
-<h3>31. Kesimpulan</h3>
-<ul>
-    <p>Naive Bayes lebih unggul dari sisi kecepatan dan kestabilan (akurasi) jika data sudah dikategorikan.<br>
-      Decision Tree tetap fleksibel dan lebih mudah dipahami dalam bentuk visual, apalagi setelah data didiskritisasi</p>
-</ul>
-<!--     <img src="6_dt.png" class="logo__image only-light" alt="pilih_iris"/>
-    <img src="6_dt.png" class="logo__image only-dark pst-js-only" alt="pilih_iris"/><br> -->
-<p>
-  
-</p>
-<br>
+
 <!-- <section id="learn-more">
 <h2>Learn more<a class="headerlink" href="#learn-more" title="Link to this heading">#</a></h2>
 <p>This is just a simple starter to get you started.
