@@ -702,9 +702,87 @@ Malignant (4)       0.96      0.88      0.92        58
  weighted avg       0.94      0.93      0.93       137</code></pre><br>
 
 
+<h3>>Evaluasi Model :</h3>
+<p>Decission Tree</p><br>
+<pre><code>from ucimlrepo import fetch_ucirepo
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
 
+# Ambil dataset
+dataset = fetch_ucirepo(id=15)
+X = dataset.data.features.copy()
+y = dataset.data.targets.copy()
 
+# Bersihkan kolom Bare_nuclei
+if X['Bare_nuclei'].dtype == 'object':
+    X['Bare_nuclei'] = pd.to_numeric(X['Bare_nuclei'], errors='coerce')
+X = X.dropna()
+y = y.loc[X.index]
 
+# Normalisasi (opsional untuk Decision Tree, bisa di-skip)
+scaler = StandardScaler()
+X_scaled = pd.DataFrame(scaler.fit_transform(X), columns=X.columns)
+
+# Split train-test
+X_train, X_test, y_train, y_test = train_test_split(
+    X_scaled, y, test_size=0.2, random_state=42
+)
+
+# Model Decision Tree
+dt_model = DecisionTreeClassifier(random_state=42)
+dt_model.fit(X_train, y_train)
+
+# Prediksi
+y_pred = dt_model.predict(X_test)
+
+# Evaluasi
+print("=== Decision Tree Classifier ===")
+print(f"Akurasi: {accuracy_score(y_test, y_pred):.4f}")
+print("Classification Report:")
+print(classification_report(y_test, y_pred, target_names=["Benign (2)", "Malignant (4)"]))
+
+# Confusion Matrix
+cm = confusion_matrix(y_test, y_pred)
+plt.figure(figsize=(4, 3))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+            xticklabels=["Benign", "Malignant"],
+            yticklabels=["Benign", "Malignant"])
+plt.title("Confusion Matrix: Decision Tree")
+plt.xlabel("Prediksi")
+plt.ylabel("Aktual")
+plt.tight_layout()
+plt.show()
+</code></pre><br>
+
+<h3>Evaluasi Model</h3>
+<p>disini saya menggunakan 3 jenis method untuk modelling yaitu Decission Tree, KNN dan SVM</p><br>
+<p>Decission Tree :<br>
+  Decission Tree (pohon keputusan) adalah metode klasifikasi atau prediksi yang menyajikan keputusan dalam bentuk pohon bercabang</p><br>
+<p>Kelebihan dan Kekurangan :<br>
+Kelebihan :<br>
+Mudah dipahami (seperti logika IF-THEN), Tidak butuh normalisasi data, Bisa digunakan untuk data numerik maupun kategori<br>
+Kekurangan :<br>
+Mudah overfitting, Sensitif terhadap perubahan kecil pada data, Kurang akurat dibanding model yang lebih kompleks jika data besar<br>
+</p>
+<p>Perhitungan :<br>
+1. Hitung Entrophy<br>
+    <img src="e_pu.png" class="logo__image only-light" alt="db"/>
+    <img src="e_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+2. Information Gain<br>
+    <img src="ig_pu.png" class="logo__image only-light" alt="db"/>
+    <img src="ig_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+3. Gain Ratio<br>
+    <img src="db_d.png" class="logo__image only-light" alt="db"/>
+    <img src="db_d.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+4. Gini Index<br>
+    <img src="db_d.png" class="logo__image only-light" alt="db"/>
+    <img src="db_d.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+</p>
 
                 
 
