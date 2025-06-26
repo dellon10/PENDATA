@@ -453,7 +453,7 @@ Dataset Breast Cancer Wisconsin (Diagnostic) adalah dataset yang berisi hasil di
 </p><br>
 
 
-<h2>Data Understanding</h2>
+<h2>1. Data Understanding</h2>
 <p>Dataset didapat dari sumber ini :<br>
 https://archive.ics.uci.edu/dataset/17/breast+cancer+wisconsin+diagnostic<br>
 </p>
@@ -663,7 +663,7 @@ dtype: int64
 
 Jumlah baris yang mengandung outlier (IQR): 171</code></pre><br>
 
-<h2>Pre Processing Data</h2>
+<h2>2. Pre Processing Data</h2>
 <h4>lakukan normalisasi data</h4><br>                                                                                                                                                                 
 
 <p>cek Missing Value :</p>
@@ -706,7 +706,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 
                   
-<h2>Modelling</h2><br>
+<h2>3. Modelling</h2><br>
                   
 <h3>Klasifikasi dengan menggunakan K-Nearest Neighbor (KNN)</h3><br>
 
@@ -778,7 +778,7 @@ weighted avg       0.97      0.96      0.96       114</code></pre><br>
 
 <h4>Visualisasi Data SVM dengan menggunakan Plot</h4>
 
-<h4>Code untuk memvisualisasi Data</h4><br>
+<h4>Code untuk memvisualisasi Data</h4>
 <pre><code>import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from sklearn.svm import SVC
@@ -863,11 +863,11 @@ plt.title("Visualisasi Decision Tree")
 plt.show()</code></pre><br>
 
 <h4>Output :</h4>
-    <img src="v_dt_uas.png" class="logo__image only-light" alt="db"/>
-    <img src="v_dt_uas.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+    <img src="o_dt_uas.png" class="logo__image only-light" alt="db"/>
+    <img src="o_dt_uas.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
 
                   
-<h2>EVALUASI MODEL</h2>
+<h2>4. EVALUASI MODEL</h2>
 <p>disini saya menggunakan 3 jenis method untuk modelling yaitu KNN, SVM dan Decission Tree</p><br>
 <h3>Decission Tree :</h3>
 <p>Decission Tree (pohon keputusan) adalah metode klasifikasi atau prediksi yang menyajikan keputusan dalam bentuk pohon bercabang</p><br>
@@ -972,7 +972,7 @@ print("Accuracy:", accuracy_score(y_test, y_pred_svm))
 print(classification_report(y_test, y_pred_svm, target_names=["Benign", "Malignant"]))</code></pre><br>
 
 <h4>Output :</h4>
-<pre><code>odel: Support Vector Machine (SVM)
+<pre><code>Model: Support Vector Machine (SVM)
 Accuracy: 0.9649122807017544
               precision    recall  f1-score   support
 
@@ -1023,8 +1023,8 @@ plt.title("SVM Decision Boundary with PCA")
 plt.show()</code></pre>
 
 <p>Hasil :</p>
-    <img src="v_dt_uas.png" class="logo__image only-light" alt="db"/>
-    <img src="v_dt_uas.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+    <img src="o_dt_uas.png" class="logo__image only-light" alt="db"/>
+    <img src="o_dt_uas.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
 
 <!-- <section id="learn-more">
 <h2>Learn more<a class="headerlink" href="#learn-more" title="Link to this heading">#</a></h2>
