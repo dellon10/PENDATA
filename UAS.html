@@ -470,8 +470,11 @@ https://archive.ics.uci.edu/dataset/17/breast+cancer+wisconsin+diagnostic<br>
 <br>
 
 <h3>Pemanggilan Data</h3>
-<p>penerapa code untuk memanggil dataset</p>
+
+<p>untuk menginstal ucimlrepo package</p>
 <pre><code>pip install ucimlrepo</code></pre><br>
+
+<p>penerapan code untuk memanggil dataset</p>
 <pre><code>from ucimlrepo import fetch_ucirepo 
   
 # fetch dataset 
@@ -564,18 +567,13 @@ print(y.head())
 </p><br>
 <p>Label adalah variabel dependen atau target yang ingin diprediksi oleh model machine learning. Label merupakan output yang dipelajari oleh model dari data<br>
 terdapat 2 label pada dataset ini :<br>
-Target ini disimpan di kolom Class. Nilai 2 berarti tumor jinak, dan 4 berarti tumor ganas.
+Label B berarti Benign (jinak) dan label M yang berarti Malignant (ganas)
 </p><br>
 
-<h4>Deteksi Missing Value dan Outlier</h4>
-<p>Missing value merupakan data yang hilang pada suatu dataset, sedangkan oulier merupakan data pada dataset yang menyimpang dari data lainnya</p>
-<pre><code># 3. Deteksi Missing Value
-missing_count = X.isnull().sum()
-missing_percent = (missing_count / X.shape[0]) * 100
-missing_summary = pd.DataFrame({
-    'Jumlah Missing': missing_count,
-    'Persentase (%)': missing_percent
-}).query("`Jumlah Missing` > 0")</code></pre>
+<h4>Deteksi Missing Value</h4>
+<p>Missing value merupakan data yang hilang pada suatu dataset</p>
+<pre><code>#Cek jumlah missing value per kolom
+print(X.isnull().sum())</code></pre>
 
 <h4>Output :</h4>
 
@@ -583,26 +581,59 @@ missing_summary = pd.DataFrame({
              Jumlah Missing  Persentase (%)
 Bare_nuclei              16        2.288984</code></pre><br>
 
-<pre><code># 4. Deteksi Outlier (IQR Method)
-outlier_counts = {}
-for column in X.select_dtypes(include=['float64', 'int64']).columns:
-    Q1 = X[column].quantile(0.25)
-    Q3 = X[column].quantile(0.75)
-    IQR = Q3 - Q1
-    lower_bound = Q1 - 1.5 * IQR
-    upper_bound = Q3 + 1.5 * IQR
-    outliers = X[(X[column] < lower_bound) | (X[column] > upper_bound)]
-    outlier_counts[column] = len(outliers)</code></pre>
+
+<h4>Deteksi Outlier</h4>
+<p>Outlier merupakan data pada dataset yang menyimpang dari data lainnya</p>
+<pre><code>Q1 = X.quantile(0.25)
+Q3 = X.quantile(0.75)
+IQR = Q3 - Q1
+
+# Cek kondisi outlier
+outliers_iqr = (X < (Q1 - 1.5 * IQR)) | (X > (Q3 + 1.5 * IQR))
+
+# Hitung jumlah outlier per kolom
+print("Jumlah outlier per fitur (IQR):")
+print(outliers_iqr.sum())
+
+# Jumlah total baris yang mengandung outlier
+print(f"\nJumlah baris yang mengandung outlier (IQR): {outliers_iqr.any(axis=1).sum()}")</code></pre>
 
 <h4>Output :</h4>
 
-<pre><code>=== KESIMPULAN: OUTLIER ===
-                             Jumlah Outlier
-Mitoses                                 120
-Normal_nucleoli                          77
-Marginal_adhesion                        60
-Single_epithelial_cell_size              54
-Bland_chromatin                          20</code></pre><br>
+<pre><code>Jumlah outlier per fitur (IQR):
+radius1               14
+texture1               7
+perimeter1            13
+area1                 25
+smoothness1            6
+compactness1          16
+concavity1            18
+concave_points1       10
+symmetry1             15
+fractal_dimension1    15
+radius2               38
+texture2              20
+perimeter2            38
+area2                 65
+smoothness2           30
+compactness2          28
+concavity2            22
+concave_points2       19
+symmetry2             27
+fractal_dimension2    28
+radius3               17
+texture3               5
+perimeter3            15
+area3                 35
+smoothness3            7
+compactness3          16
+concavity3            12
+concave_points3        0
+symmetry3             23
+fractal_dimension3    24
+dtype: int64
+
+Jumlah baris yang mengandung outlier (IQR): 171</code></pre><br>
 
 <h3>Pre Processing Data</h3>
 <p>Semua fitur bernilai 1–10, kecuali kolom Bare_nuclei, yang bisa lebih tinggi karena hasil konversi dari data aslinya hasilnya akan lebih aman jika dinormalisasi, berikut ini adalah code untuk menormalisasi data </p><br>
