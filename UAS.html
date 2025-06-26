@@ -664,7 +664,7 @@ dtype: int64
 Jumlah baris yang mengandung outlier (IQR): 171</code></pre><br>
 
 <h2>Pre Processing Data</h2>
-<p>lakukan normalisasi data :</p><br>                                                                                                                                                                 
+<h4>lakukan normalisasi data</h4><br>                                                                                                                                                                 
 
 <p>cek Missing Value :</p>
 <pre><code>print(X.isnull().sum().sum())  # harusnya 0
@@ -706,11 +706,11 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 
                   
-<h2>Modelling :</h2><br>
+<h2>Modelling</h2><br>
                   
 <h3>Klasifikasi dengan menggunakan K-Nearest Neighbor (KNN)</h3><br>
 
-<p>Gunakan Library</p><br>
+<p>Gunakan Library</p>
 <pre><code>from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score, classification_report</code></pre><br>
 
@@ -745,18 +745,18 @@ Accuracy: 0.956140350877193
 weighted avg       0.96      0.96      0.96       114</code></pre><br>
 
 <h3>Klasifikasi menggunakan Support Vector Machine (SVM)</h3><br>
-<p>Gunakan Library SVM</p><br>
+<p>Gunakan Library SVM</p>
 <pre><code>from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score, classification_report</code></pre><br>
 
-<p>Inisialisasi Data</p><br>
+<p>Inisialisasi Data</p>
 <pre><code># Linear kernel cocok karena datanya cukup terpisah
 svm_model = SVC(kernel='linear')  # Bisa diganti 'rbf' untuk nonlinear
 
 # Latih model
 svm_model.fit(X_train, y_train)</code></pre><br>
 
-<p>Prediksi Data</p><br>
+<p>Prediksi Data</p>
 <pre><code>y_pred_svm = svm_model.predict(X_test)</code></pre><br>
 
 <p>Evaluasi Model</p>
@@ -778,7 +778,7 @@ weighted avg       0.97      0.96      0.96       114</code></pre><br>
 
 <h4>Visualisasi Data SVM dengan menggunakan Plot</h4>
 
-<p>Visualisasi Data</p><br>
+<h4>Code untuk memvisualisasi Data</h4><br>
 <pre><code>import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from sklearn.svm import SVC
@@ -821,11 +821,56 @@ plt.show()</code></pre><br>
     <img src="p_svm_uas.png" class="logo__image only-light" alt="db"/>
     <img src="p_svm_uas.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
                   
+<h3>Klasifikasi dengan menggunakan Decission Tree (pohon keputusan)</h3><br>
+<p>gunakan library Decission Tree</p>
+<pre><code>from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score, classification_report</code></pre><br>
+
+<p>Inisialisasi Data</p>
+<pre><code>#Inisialisasi dan training
+dt_model = DecisionTreeClassifier(random_state=42)
+dt_model.fit(X_train, y_train)</code></pre><br>
+
+<p>Evaluasi Model</p>
+<pre><code># Prediksi
+y_pred_dt = dt_model.predict(X_test)
+
+# Evaluasi
+print("Model: Decision Tree")
+print("Accuracy:", accuracy_score(y_test, y_pred_dt))
+print(classification_report(y_test, y_pred_dt, target_names=["Benign", "Malignant"]))</code></pre><br>
+
+<h4>Output :</h4>
+<pre><code>Model: Decision Tree
+Accuracy: 0.9298245614035088
+              precision    recall  f1-score   support
+
+      Benign       0.94      0.94      0.94        72
+   Malignant       0.90      0.90      0.90        42
+
+    accuracy                           0.93       114
+   macro avg       0.92      0.92      0.92       114
+weighted avg       0.93      0.93      0.93       114</code></pre><br>
+
+
+<p>Visualisasi Data</p>
+<pre><code>import matplotlib.pyplot as plt
+from sklearn.tree import plot_tree
+
+plt.figure(figsize=(20, 10))
+plot_tree(dt_model, feature_names=X.columns, class_names=["Benign", "Malignant"], filled=True, fontsize=8)
+plt.title("Visualisasi Decision Tree")
+plt.show()</code></pre><br>
+
+<h4>Output :</h4>
+    <img src="v_dt_uas.png" class="logo__image only-light" alt="db"/>
+    <img src="v_dt_uas.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+
                   
-<h3>Evaluasi Model</h3>
-<p>disini saya menggunakan 3 jenis method untuk modelling yaitu Decission Tree, KNN dan SVM</p><br>
-<p>Decission Tree :<br>
-  Decission Tree (pohon keputusan) adalah metode klasifikasi atau prediksi yang menyajikan keputusan dalam bentuk pohon bercabang</p><br>
+<h2>EVALUASI MODEL</h2>
+<p>disini saya menggunakan 3 jenis method untuk modelling yaitu KNN, SVM dan Decission Tree</p><br>
+<h3>Decission Tree :</h3>
+<p>Decission Tree (pohon keputusan) adalah metode klasifikasi atau prediksi yang menyajikan keputusan dalam bentuk pohon bercabang</p><br>
 <p>Kelebihan dan Kekurangan :<br>
 Kelebihan :<br>
 Mudah dipahami (seperti logika IF-THEN), Tidak butuh normalisasi data, Bisa digunakan untuk data numerik maupun kategori<br>
@@ -836,143 +881,70 @@ Mudah overfitting, Sensitif terhadap perubahan kecil pada data, Kurang akurat di
 1. Hitung Entrophy<br>
     <img src="e_pu.png" class="logo__image only-light" alt="db"/>
     <img src="e_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+<p> </p>
 2. Information Gain<br>
     <img src="ig_pu.png" class="logo__image only-light" alt="db"/>
     <img src="ig_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+<p> </p>
 3. Gain Ratio<br>
     <img src="gr_pu.png" class="logo__image only-light" alt="db"/>
     <img src="gr_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+<p> </p>
 4. Gini Index<br>
     <img src="gi_pu.png" class="logo__image only-light" alt="db"/>
     <img src="gi_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
 </p><br>
 
-<p>Penerapan</p><br>
-<pre><code>from ucimlrepo import fetch_ucirepo
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
-import matplotlib.pyplot as plt
-import seaborn as sns
+<p>Penerapan</p>
+<pre><code>from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score, classification_report
 
-# Ambil dataset
-dataset = fetch_ucirepo(id=15)
-X = dataset.data.features.copy()
-y = dataset.data.targets.copy()
-
-# Bersihkan kolom Bare_nuclei
-if X['Bare_nuclei'].dtype == 'object':
-    X['Bare_nuclei'] = pd.to_numeric(X['Bare_nuclei'], errors='coerce')
-X = X.dropna()
-y = y.loc[X.index]
-
-# Normalisasi (opsional untuk Decision Tree, bisa di-skip)
-scaler = StandardScaler()
-X_scaled = pd.DataFrame(scaler.fit_transform(X), columns=X.columns)
-
-# Split train-test
-X_train, X_test, y_train, y_test = train_test_split(
-    X_scaled, y, test_size=0.2, random_state=42
-)
-
-# Model Decision Tree
+#Inisialisasi dan training
 dt_model = DecisionTreeClassifier(random_state=42)
 dt_model.fit(X_train, y_train)
 
-# Prediksi
-y_pred = dt_model.predict(X_test)
+#Prediksi
+y_pred_dt = dt_model.predict(X_test)
 
-# Evaluasi
-print("=== Decision Tree Classifier ===")
-print(f"Akurasi: {accuracy_score(y_test, y_pred):.4f}")
-print("Classification Report:")
-print(classification_report(y_test, y_pred, target_names=["Benign (2)", "Malignant (4)"]))
-
-# Confusion Matrix
-cm = confusion_matrix(y_test, y_pred)
-plt.figure(figsize=(4, 3))
-sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
-            xticklabels=["Benign", "Malignant"],
-            yticklabels=["Benign", "Malignant"])
-plt.title("Confusion Matrix: Decision Tree")
-plt.xlabel("Prediksi")
-plt.ylabel("Aktual")
-plt.tight_layout()
-plt.show()
+#Evaluasi
+print("Model: Decision Tree")
+print("Accuracy:", accuracy_score(y_test, y_pred_dt))
+print(classification_report(y_test, y_pred_dt, target_names=["Benign", "Malignant"]))
 </code></pre><br>
 <p>Hasil</p>
-    <img src="dt_pu.png" class="logo__image only-light" alt="db"/>
-    <img src="dt_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+    <img src="o_dt_uas.png" class="logo__image only-light" alt="db"/>
+    <img src="o_dt_uas.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
                 
 <p>
 
   
 </p>
-<p>K-Nearest Neighbors (KNN)<br>
-Langkah-langkah KNN :<br>
+<h3>K-Nearest Neighbors (KNN)</h3>
+<p>Langkah-langkah KNN :<br>
 Tentukan jumlah tetangga (K) yang akan digunakan untuk pertimbangan penentuan kelas (metode cross validation)<br>
 Hitung jarak dari data baru ke masing-masing data point di dataset (eulidien distance)<br>
 Ambil tetangga terdekat menurut K, kemudian hitung rata-ratanya<br>
 </p>
 <p>Penerapan</p>
-<pre><code>from ucimlrepo import fetch_ucirepo
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
-import matplotlib.pyplot as plt
-import seaborn as sns
+<pre><code>from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score, classification_report
 
-# Ambil dataset
-dataset = fetch_ucirepo(id=15)
-X = dataset.data.features.copy()
-y = dataset.data.targets.copy()
-
-# Bersihkan kolom Bare_nuclei
-if X['Bare_nuclei'].dtype == 'object':
-    X['Bare_nuclei'] = pd.to_numeric(X['Bare_nuclei'], errors='coerce')
-X = X.dropna()
-y = y.loc[X.index]
-
-# Normalisasi (WAJIB untuk KNN)
-scaler = StandardScaler()
-X_scaled = pd.DataFrame(scaler.fit_transform(X), columns=X.columns)
-
-# Split data
-X_train, X_test, y_train, y_test = train_test_split(
-    X_scaled, y, test_size=0.2, random_state=42
-)
-
-# Model KNN (default k=5)
+# Inisialisasi model KNN dengan k = 5
 knn_model = KNeighborsClassifier(n_neighbors=5)
+
+# Latih model pada data training
 knn_model.fit(X_train, y_train)
 
-# Prediksi
-y_pred = knn_model.predict(X_test)
+# Prediksi data uji
+y_pred_knn = knn_model.predict(X_test)
 
-# Evaluasi
-print("=== K-Nearest Neighbors Classifier ===")
-print(f"Akurasi: {accuracy_score(y_test, y_pred):.4f}")
-print("Classification Report:")
-print(classification_report(y_test, y_pred, target_names=["Benign (2)", "Malignant (4)"]))
-
-# Confusion Matrix
-cm = confusion_matrix(y_test, y_pred)
-plt.figure(figsize=(4, 3))
-sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
-            xticklabels=["Benign", "Malignant"],
-            yticklabels=["Benign", "Malignant"])
-plt.title("Confusion Matrix: KNN")
-plt.xlabel("Prediksi")
-plt.ylabel("Aktual")
-plt.tight_layout()
-plt.show()</code></pre><br>
+# Evaluasi performa model
+print("Model: K-Nearest Neighbors (KNN)")
+print("Accuracy:", accuracy_score(y_test, y_pred_knn))
+print(classification_report(y_test, y_pred_knn, target_names=["Benign", "Malignant"]))</code></pre><br>
 <p>Hasil</p>
-    <img src="knn_pu.png" class="logo__image only-light" alt="db"/>
-    <img src="knn_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+    <img src="o_knn_uas.png" class="logo__image only-light" alt="db"/>
+    <img src="o_knn_uas.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
 <p>
 
   
@@ -980,66 +952,79 @@ plt.show()</code></pre><br>
 <p>Support Vector Machine (SVM)<br>
 Langkah-langkah SVM :<br>
 Plot titik titik<br>
-Cari Garis tengah antara 2 kelas, ambil titik tengah mwnggunakan euclidean distance<br>
+Cari Garis tengah antara 2 kelas, ambil titik tengah menggunakan euclidean distance<br>
 Garis pemisah tegak lurus garis penghubung A–C<br>
 </p>
 <p>Penerapan :</p>
-<pre><code>from ucimlrepo import fetch_ucirepo
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.svm import SVC
-from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
-import matplotlib.pyplot as plt
-import seaborn as sns
+<pre><code>from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score, classification_report
 
-# Ambil dataset
-dataset = fetch_ucirepo(id=15)
-X = dataset.data.features.copy()
-y = dataset.data.targets.copy()
+# Linear kernel cocok karena datanya cukup terpisah
+svm_model = SVC(kernel='linear')  # Bisa diganti 'rbf' untuk nonlinear
 
-# Bersihkan kolom Bare_nuclei
-if X['Bare_nuclei'].dtype == 'object':
-    X['Bare_nuclei'] = pd.to_numeric(X['Bare_nuclei'], errors='coerce')
-X = X.dropna()
-y = y.loc[X.index]
-
-# Normalisasi (WAJIB untuk SVM)
-scaler = StandardScaler()
-X_scaled = pd.DataFrame(scaler.fit_transform(X), columns=X.columns)
-
-# Split data
-X_train, X_test, y_train, y_test = train_test_split(
-    X_scaled, y, test_size=0.2, random_state=42
-)
-
-# Model SVM (kernel default: RBF)
-svm_model = SVC(kernel='rbf', C=1.0, gamma='scale')  # Bisa coba 'linear', 'poly', dll
+# Latih model
 svm_model.fit(X_train, y_train)
 
-# Prediksi
-y_pred = svm_model.predict(X_test)
+y_pred_svm = svm_model.predict(X_test)
 
-# Evaluasi
-print("=== Support Vector Machine Classifier ===")
-print(f"Akurasi: {accuracy_score(y_test, y_pred):.4f}")
-print("Classification Report:")
-print(classification_report(y_test, y_pred, target_names=["Benign (2)", "Malignant (4)"]))
+print("Model: Support Vector Machine (SVM)")
+print("Accuracy:", accuracy_score(y_test, y_pred_svm))
+print(classification_report(y_test, y_pred_svm, target_names=["Benign", "Malignant"]))</code></pre><br>
 
-# Confusion Matrix
-cm = confusion_matrix(y_test, y_pred)
-plt.figure(figsize=(4, 3))
-sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
-            xticklabels=["Benign", "Malignant"],
-            yticklabels=["Benign", "Malignant"])
-plt.title("Confusion Matrix: SVM")
-plt.xlabel("Prediksi")
-plt.ylabel("Aktual")
-plt.tight_layout()
-plt.show()</code></pre><br>
+<h4>Output :</h4>
+<pre><code>odel: Support Vector Machine (SVM)
+Accuracy: 0.9649122807017544
+              precision    recall  f1-score   support
+
+      Benign       0.95      1.00      0.97        72
+   Malignant       1.00      0.90      0.95        42
+
+    accuracy                           0.96       114
+   macro avg       0.97      0.95      0.96       114
+weighted avg       0.97      0.96      0.96       114</code></pre><br>
+
+<h4>Visualisasi Data</h4>
+<pre><code>import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
+from sklearn.svm import SVC
+
+# 1. Reduksi dimensi jadi 2 dengan PCA
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(X_scaled)
+
+# 2. Split ulang data yang sudah direduksi
+X_train_pca, X_test_pca, y_train_pca, y_test_pca = train_test_split(
+    X_pca, y_encoded, test_size=0.2, random_state=42, stratify=y_encoded)
+
+# 3. Buat dan latih model SVM
+svm = SVC(kernel='linear')
+svm.fit(X_train_pca, y_train_pca)
+
+# 4. Plot decision boundary
+import numpy as np
+
+# buat grid untuk visualisasi
+h = .02  # resolusi grid
+x_min, x_max = X_pca[:, 0].min() - 1, X_pca[:, 0].max() + 1
+y_min, y_max = X_pca[:, 1].min() - 1, X_pca[:, 1].max() + 1
+xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
+                     np.arange(y_min, y_max, h))
+
+# prediksi semua titik dalam grid
+Z = svm.predict(np.c_[xx.ravel(), yy.ravel()])
+Z = Z.reshape(xx.shape)
+
+# plot boundary dan titik data
+plt.contourf(xx, yy, Z, cmap=plt.cm.coolwarm, alpha=0.3)
+plt.scatter(X_pca[:, 0], X_pca[:, 1], c=y_encoded, cmap=plt.cm.coolwarm, edgecolors='k')
+plt.xlabel("PCA 1")
+plt.ylabel("PCA 2")
+plt.title("SVM Decision Boundary with PCA")
+plt.show()</code></pre>
+
 <p>Hasil :</p>
-    <img src="svm_pu.png" class="logo__image only-light" alt="db"/>
-    <img src="svm_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+    <img src="v_dt_uas.png" class="logo__image only-light" alt="db"/>
+    <img src="v_dt_uas.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
 
 <!-- <section id="learn-more">
 <h2>Learn more<a class="headerlink" href="#learn-more" title="Link to this heading">#</a></h2>
