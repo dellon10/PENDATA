@@ -1026,6 +1026,26 @@ plt.show()</code></pre>
     <img src="p_svm_uas.png" class="logo__image only-light" alt="db"/>
     <img src="p_svm_uas.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
 
+
+<h2>DEPLOYMENT</h2>
+<P>pada tahap ini saya akan menyimpan model dari single model SVM yang sudah dibuat. Tujuan dilakukan penyimpanan model adalah supaya mudah dipanggil ketika akan memasuki tahap deployment</P><br>
+
+<p>Gunakan Librar joblib</p>
+<pre><code>import joblib
+
+# Save the model to a file
+joblib.dump(svm_model, 'svm_model.pkl')</code></pre><br>
+
+<p>Integrasi model ke web</p>
+<p>1. instal steamlit<br>
+2. buat file .py, disini saya membuat file app.py<br>
+3. panggil model yang telah disimpan ke app.py<br>
+</p><br>
+
+<h4>Hasil web</h4>
+
+
+
 <!-- <section id="learn-more">
 <h2>Learn more<a class="headerlink" href="#learn-more" title="Link to this heading">#</a></h2>
 <p>This is just a simple starter to get you started.
