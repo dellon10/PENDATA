@@ -447,42 +447,45 @@
 
 <h1>UAS PENDATA</h1><br>
     
-<h2>Prediksi Produktivitas Karyawan Garmen</h2>
+<h2>Breast Cancer Wisconsin (Diagnostic)</h2>
 <p>Deskripsi :<br>
-Industri garmen merupakan salah satu contoh utama globalisasi industri di era modern ini, Industri ini merupakan industri yang sangat padat karya dengan banyak proses manual. Memenuhi permintaan global yang besar akan produk garmen sebagian besar bergantung pada kinerja produksi dan pengiriman karyawan di perusahaan manufaktur garmen. Jadi, sangat diharapkan di antara para pengambil keputusan di industri garmen untuk melacak, menganalisis, dan memprediksi kinerja produktivitas tim kerja di pabrik mereka. Kumpulan data ini dapat digunakan untuk tujuan regresi dengan memprediksi rentang produktivitas (0-1) atau untuk tujuan klasifikasi dengan mengubah rentang produktivitas (0-1) menjadi kelas-kelas yang berbeda
+Dataset Breast Cancer Wisconsin (Diagnostic) adalah dataset yang berisi hasil diagnosis sel kanker payudara, apakah termasuk ganas (malignant) atau jinak (benign), berdasarkan hasil uji laboratorium terhadap sampel sel dari aspirasi jarum halus (fine needle aspirates - FNA) pada pasien, Dataset ini digunakan secara luas dalam riset kecerdasan buatan, machine learning, dan data science sebagai contoh klasifikasi medis
 </p><br>
 
 
 <h3>Data Understanding</h3>
 <p>Dataset didapat dari sumber ini :<br>
-https://archive.ics.uci.edu/dataset/597/productivity+prediction+of+garment+employees<br>
+https://archive.ics.uci.edu/dataset/17/breast+cancer+wisconsin+diagnostic<br>
 </p>
 
 <h4>Tujuan :</h4>
-<p>untuk menghitung prediksi produksi karyawan garmen
+<p>Dataset ini digunakan untuk memprediksi apakah sebuah tumor ganas (M) atau jinak (B) berdasarkan sejumlah fitur numerik yang didapat dari gambar digital sampel jaringan
 </p><br>
 
 <h3>Integrasi Data</h3>
 <p>untuk mengambil data agar dapat diolah, perlu untuk menginstall package yang telah disediakan oleh UCI Dataset. Instalasi dilakukan berguna untuk menarik data yang berasal dari UCI dataset agar dapat diolah. peritah untuk mengambil data dari UCI dataset dapat di lihat ketika menekan tombol import in python pada datase yang diinginkan dan ikuti perintah tersebut agar data dapat diambil dari UCI dataset. Contoh pengambilan data dari UCI dataset dapat dilihat pada gambar dan perintah berikut:
 </p><br>
-    <img src="ds_pa_d.png" class="logo__image only-light" alt="db"/>
-    <img src="ds_pa.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+    <img src="ds_uas.png" class="logo__image only-light" alt="db"/>
+    <img src="ds_uas.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
 <br>
+
+<h3>Pemanggilan Data</h3>
+<p>penerapa code untuk memanggil dataset</p>
 <pre><code>pip install ucimlrepo</code></pre><br>
 <pre><code>from ucimlrepo import fetch_ucirepo 
   
 # fetch dataset 
-breast_cancer_wisconsin_original = fetch_ucirepo(id=15) 
+breast_cancer_wisconsin_diagnostic = fetch_ucirepo(id=17) 
   
 # data (as pandas dataframes) 
-X = breast_cancer_wisconsin_original.data.features 
-y = breast_cancer_wisconsin_original.data.targets 
+X = breast_cancer_wisconsin_diagnostic.data.features 
+y = breast_cancer_wisconsin_diagnostic.data.targets 
   
 # metadata 
-print(breast_cancer_wisconsin_original.metadata) 
+print(breast_cancer_wisconsin_diagnostic.metadata) 
   
 # variable information 
-print(breast_cancer_wisconsin_original.variables) 
+print(breast_cancer_wisconsin_diagnostic.variables)
 </code></pre><br>
 
 <h3>Eksplorasi Data</h3>
@@ -545,18 +548,19 @@ print(y.head())
 
 <h3>Struktur Dataset</h3>
 <p>fitur dan label :<br>
-  terdapat 699 baris, 2 kelas dan 9 fitur<br>
-  Fitur adalah atribut atau variabel independen dalam dataset yang digunakan untuk membuat prediksi</p><br>
-  <p>Terdapat 9 fitur pada dataset ini :<br>
-  1. Clump Thickness adalah Ketebalan gumpalan sel, merupakan tipe data integer<br>
-  2. Uniformity of Cell Size adalah Keseragaman ukuran sel, merupakan tipe data integer<br>
-  3. Uniformity of Cell Shape adalah Keseragaman bentuk sel, merupakan tipe data integer<br>
-  4. Marginal Adhesion adalah Tingkat keterikatan sel di tepi jaringan, merupakan tipe data integer<br>
-  5. Single Epithelial Cell Size adalah Ukuran sel epitel tunggal, merupakan tipe data integer<br>
-  6. Bare Nuclei adalah Jumlah nukleus yang tidak terlapisi, merupakan tipe data float<br>
-  7. Bland Chromatin adalah Tingkat kehalusan kromatin, merupakan tipe data integer<br>
-  8. Normal Nucleoli adalah Jumlah nucleoli yang normal, merupakan tipe data integer<br>
-  9. Mitoses adalah Jumlah mitosis (pembelahan sel), merupakan tipe data integer<br>
+  Dataset terdiri dari 569 baris, 2 kelas, dan 30 fitur numerik<br>
+  Fitur adalah atribut atau variabel independen dalam dataset yang digunakan untuk membuat prediksi, dalam dataset ini setiap fitur diukur menggunakan 3 bentuk statistik (Mean, SE dan Worst)</p><br>
+  <p>Terdapat 30 fitur numerik pada dataset ini :<br>
+  1. radius_mean, radius_se, radius_worst : Jarak dari pusat ke tepi inti sel (semacam jari-jari sel) tujuannya untuk menggambarkan ukuran inti sel<br>
+  2. texture_mean, texture_se, texture_worst : Deviasi standar dari level intensitas gray-scale di dalam sel tujuannya untuk menggambarkan variasi tekstur pada gambar sel<br>
+  3. perimeter_mean, perimeter_se, perimeter_worst : Makna: Keliling inti sel tujuannya untuk Indikator ukuran sel yang berhubungan erat dengan radius<br>
+  4. area_mean, area_se, area_worst : Luas area inti sel tujuannya untuk Mengukur besarnya inti yang tampak pada gambar<br>
+  5. smoothness_mean, smoothness_se, smoothness_worst : Variasi lokal panjang radius — semakin kecil, semakin halus permukaan sel tujuannya untuk Menggambarkan kehalusan atau kasar tidaknya tepi sel<br>
+  6. compactness_mean, compactness_se, compactness_worst : (Perimeter² / Area) – 1.0 tujuannya untuk Mengukur kekompakan sel. Semakin besar, bentuk semakin tidak padat<br>
+  7. concavity_mean, concavity_se, concavity_worst : Derajat cekungan pada batas sel tujuannya untuk Mengukur seberapa dalam bagian-bagian dari batas sel yang masuk ke dalam<br>
+  8. concave points_mean, concave points_se, concave points_worst : Jumlah titik pada batas sel yang cekung tujuannya untuk Mengindikasikan ketidakteraturan bentuk sel<br>
+  9. symmetry_mean, symmetry_se, symmetry_worst : Ukuran simetri dari sel tujuannya untuk Mengukur seberapa simetris bentuk sel (tidak simetris cenderung lebih ganas)<br>
+  10. fractal_dimension_mean, fractal_dimension_se, fractal_dimension_worst : Kompleksitas dari garis tepi (batas) sel tujuannya untuk Mendeteksi kerumitan bentuk sel, biasanya tumor ganas memiliki bentuk lebih kompleks<br>
 </p><br>
 <p>Label adalah variabel dependen atau target yang ingin diprediksi oleh model machine learning. Label merupakan output yang dipelajari oleh model dari data<br>
 terdapat 2 label pada dataset ini :<br>
