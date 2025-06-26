@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Penambangan Data</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: Consolas, "Courier New", monospace;
+        }
+        code {
+            color: #c7254e;
+            background-color: #f9f2f4;
+            padding: 2px 4px;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdown';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Content with notebooks" href="notebooks.html" />
+    <link rel="prev" title="Welcome to your Jupyter Book" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+    <img src="_static/logobaru.jpeg" class="logo__image only-light" alt="My sample book - Home"/>
+    <img src="_static/logobaru.jpeg" class="logo__image only-dark pst-js-only" alt="My sample book - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Profil
+                </a>
+            </li>
+        </ul>
+<!--         <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Understanding</a></li> -->
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="markdown.html">
+                    Data Understanding
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="Processing.html">
+                    Preprocessing
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="hal4.html">
+                    K-Means Clustering
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="fuzzy_c_means.html">
+                    Fuzzy C Means
+                </a>
+            </li>
+        </ul>
+       <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="decissiontree.html">
+                    Decission Tree
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="diskritisasi.html">
+                    Diskritisasi Data
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="implementasi_pendata.html">
+                    Implementasi Pendata
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="UAS.html">
+                    UAS Pendata
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<!-- <li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li> -->
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fmarkdown.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/markdown.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<!-- <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button> -->
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<!--  <div id="jb-print-docs-body" class="onlyprint">
+    <h1>Markdown Files</h1>
+    Table of contents
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-myst">What is MyST?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-roles-and-directives">Sample Roles and Directives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citations">Citations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learn-more">Learn more</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div> -->
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  
+</p>
+
+<h1>UAS PENDATA</h1><br>
+    
+<h2>Prediksi Produktivitas Karyawan Garmen</h2>
+<p>Deskripsi :<br>
+Industri garmen merupakan salah satu contoh utama globalisasi industri di era modern ini, Industri ini merupakan industri yang sangat padat karya dengan banyak proses manual. Memenuhi permintaan global yang besar akan produk garmen sebagian besar bergantung pada kinerja produksi dan pengiriman karyawan di perusahaan manufaktur garmen. Jadi, sangat diharapkan di antara para pengambil keputusan di industri garmen untuk melacak, menganalisis, dan memprediksi kinerja produktivitas tim kerja di pabrik mereka. Kumpulan data ini dapat digunakan untuk tujuan regresi dengan memprediksi rentang produktivitas (0-1) atau untuk tujuan klasifikasi dengan mengubah rentang produktivitas (0-1) menjadi kelas-kelas yang berbeda
+</p><br>
+
+
+<h3>Data Understanding</h3>
+<p>Dataset didapat dari sumber ini :<br>
+https://archive.ics.uci.edu/dataset/597/productivity+prediction+of+garment+employees<br>
+</p>
+
+<h4>Tujuan :</h4>
+<p>untuk menghitung prediksi produksi karyawan garmen
+</p><br>
+
+<h3>Integrasi Data</h3>
+<p>untuk mengambil data agar dapat diolah, perlu untuk menginstall package yang telah disediakan oleh UCI Dataset. Instalasi dilakukan berguna untuk menarik data yang berasal dari UCI dataset agar dapat diolah. peritah untuk mengambil data dari UCI dataset dapat di lihat ketika menekan tombol import in python pada datase yang diinginkan dan ikuti perintah tersebut agar data dapat diambil dari UCI dataset. Contoh pengambilan data dari UCI dataset dapat dilihat pada gambar dan perintah berikut:
+</p><br>
+    <img src="ds_pa_d.png" class="logo__image only-light" alt="db"/>
+    <img src="ds_pa.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+<br>
+<pre><code>pip install ucimlrepo</code></pre><br>
+<pre><code>from ucimlrepo import fetch_ucirepo 
+  
+# fetch dataset 
+breast_cancer_wisconsin_original = fetch_ucirepo(id=15) 
+  
+# data (as pandas dataframes) 
+X = breast_cancer_wisconsin_original.data.features 
+y = breast_cancer_wisconsin_original.data.targets 
+  
+# metadata 
+print(breast_cancer_wisconsin_original.metadata) 
+  
+# variable information 
+print(breast_cancer_wisconsin_original.variables) 
+</code></pre><br>
+
+<h3>Eksplorasi Data</h3>
+<p>untuk memunculkan contoh data bisa menggunakan code ini :</p>
+<pre><code>from ucimlrepo import fetch_ucirepo
+import pandas as pd
+
+# Fetch dataset
+breast_cancer_wisconsin_original = fetch_ucirepo(id=15)
+
+# Data (as pandas dataframes)
+X = breast_cancer_wisconsin_original.data.features
+y = breast_cancer_wisconsin_original.data.targets
+
+# Tampilkan metadata
+print("=== Metadata ===")
+print(breast_cancer_wisconsin_original.metadata)
+
+# Tampilkan informasi variabel
+print("\n=== Informasi Variabel ===")
+print(breast_cancer_wisconsin_original.variables)
+
+# Tampilkan beberapa baris pertama dari data fitur
+print("\n=== Data Fitur (X) ===")
+print(X.head())
+
+# Tampilkan beberapa baris pertama dari target
+print("\n=== Target (y) ===")
+print(y.head())
+</code></pre><br>
+
+                
+<p>untuk memunculkan distribusi fiur data bisa menggunakan code ini :</p>
+<pre><code>from ucimlrepo import fetch_ucirepo
+import pandas as pd
+
+# Fetch dataset
+breast_cancer_wisconsin_original = fetch_ucirepo(id=15)
+
+# Data (as pandas dataframes)
+X = breast_cancer_wisconsin_original.data.features
+y = breast_cancer_wisconsin_original.data.targets
+
+# Tampilkan metadata
+print("=== Metadata ===")
+print(breast_cancer_wisconsin_original.metadata)
+
+# Tampilkan informasi variabel
+print("\n=== Informasi Variabel ===")
+print(breast_cancer_wisconsin_original.variables)
+
+# Tampilkan beberapa baris pertama dari data fitur
+print("\n=== Data Fitur (X) ===")
+print(X.head())
+
+# Tampilkan beberapa baris pertama dari target
+print("\n=== Target (y) ===")
+print(y.head())
+</code></pre><br>
+
+<h3>Struktur Dataset</h3>
+<p>fitur dan label :<br>
+  terdapat 699 baris, 2 kelas dan 9 fitur<br>
+  Fitur adalah atribut atau variabel independen dalam dataset yang digunakan untuk membuat prediksi</p><br>
+  <p>Terdapat 9 fitur pada dataset ini :<br>
+  1. Clump Thickness adalah Ketebalan gumpalan sel, merupakan tipe data integer<br>
+  2. Uniformity of Cell Size adalah Keseragaman ukuran sel, merupakan tipe data integer<br>
+  3. Uniformity of Cell Shape adalah Keseragaman bentuk sel, merupakan tipe data integer<br>
+  4. Marginal Adhesion adalah Tingkat keterikatan sel di tepi jaringan, merupakan tipe data integer<br>
+  5. Single Epithelial Cell Size adalah Ukuran sel epitel tunggal, merupakan tipe data integer<br>
+  6. Bare Nuclei adalah Jumlah nukleus yang tidak terlapisi, merupakan tipe data float<br>
+  7. Bland Chromatin adalah Tingkat kehalusan kromatin, merupakan tipe data integer<br>
+  8. Normal Nucleoli adalah Jumlah nucleoli yang normal, merupakan tipe data integer<br>
+  9. Mitoses adalah Jumlah mitosis (pembelahan sel), merupakan tipe data integer<br>
+</p><br>
+<p>Label adalah variabel dependen atau target yang ingin diprediksi oleh model machine learning. Label merupakan output yang dipelajari oleh model dari data<br>
+terdapat 2 label pada dataset ini :<br>
+Target ini disimpan di kolom Class. Nilai 2 berarti tumor jinak, dan 4 berarti tumor ganas.
+</p><br>
+
+<h4>Deteksi Missing Value dan Outlier</h4>
+<p>Missing value merupakan data yang hilang pada suatu dataset, sedangkan oulier merupakan data pada dataset yang menyimpang dari data lainnya</p>
+<pre><code># 3. Deteksi Missing Value
+missing_count = X.isnull().sum()
+missing_percent = (missing_count / X.shape[0]) * 100
+missing_summary = pd.DataFrame({
+    'Jumlah Missing': missing_count,
+    'Persentase (%)': missing_percent
+}).query("`Jumlah Missing` > 0")</code></pre>
+
+<h4>Output :</h4>
+
+<pre><code>=== KESIMPULAN: MISSING VALUE ===
+             Jumlah Missing  Persentase (%)
+Bare_nuclei              16        2.288984</code></pre><br>
+
+<pre><code># 4. Deteksi Outlier (IQR Method)
+outlier_counts = {}
+for column in X.select_dtypes(include=['float64', 'int64']).columns:
+    Q1 = X[column].quantile(0.25)
+    Q3 = X[column].quantile(0.75)
+    IQR = Q3 - Q1
+    lower_bound = Q1 - 1.5 * IQR
+    upper_bound = Q3 + 1.5 * IQR
+    outliers = X[(X[column] < lower_bound) | (X[column] > upper_bound)]
+    outlier_counts[column] = len(outliers)</code></pre>
+
+<h4>Output :</h4>
+
+<pre><code>=== KESIMPULAN: OUTLIER ===
+                             Jumlah Outlier
+Mitoses                                 120
+Normal_nucleoli                          77
+Marginal_adhesion                        60
+Single_epithelial_cell_size              54
+Bland_chromatin                          20</code></pre><br>
+
+<h3>Pre Processing Data</h3>
+<p>Semua fitur bernilai 1–10, kecuali kolom Bare_nuclei, yang bisa lebih tinggi karena hasil konversi dari data aslinya hasilnya akan lebih aman jika dinormalisasi, berikut ini adalah code untuk menormalisasi data </p><br>
+<pre><code># Install jika diperlukan:
+# !pip install ucimlrepo pandas scikit-learn
+
+from ucimlrepo import fetch_ucirepo
+import pandas as pd
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
+
+# Ambil dataset
+dataset = fetch_ucirepo(id=15)
+X = dataset.data.features.copy()
+
+# Tangani nilai '?' di 'Bare_nuclei' jika masih object
+if X['Bare_nuclei'].dtype == 'object':
+    X['Bare_nuclei'] = pd.to_numeric(X['Bare_nuclei'], errors='coerce')
+
+# Tangani missing value (drop atau imputasi)
+X = X.dropna()  # atau gunakan imputasi jika tidak ingin buang data
+
+# Normalisasi dengan MinMaxScaler (0–1)
+minmax_scaler = MinMaxScaler()
+X_minmax = pd.DataFrame(minmax_scaler.fit_transform(X), columns=X.columns)
+
+# Normalisasi dengan StandardScaler (mean=0, std=1)
+standard_scaler = StandardScaler()
+X_standard = pd.DataFrame(standard_scaler.fit_transform(X), columns=X.columns)
+
+# Tampilkan contoh hasil normalisasi
+print("=== Contoh Data Normalisasi Min-Max (0–1) ===")
+print(X_minmax.head())
+
+print("\n=== Contoh Data Normalisasi Standard (Z-score) ===")
+print(X_standard.head())</code></pre>
+<h4>Hasil</h4>
+    <img src="n_pu.png" class="logo__image only-light" alt="db"/>
+    <img src="n_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>                                                                                                                                                                     
+
+<h3>Klasifikasi :</h3>
+<p>Klasifikasi menggunakan Method Decission Tree</p>
+<pre><code># Install jika diperlukan:
+# !pip install ucimlrepo pandas scikit-learn matplotlib seaborn graphviz
+
+from ucimlrepo import fetch_ucirepo
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# 1. Ambil dataset
+dataset = fetch_ucirepo(id=15)
+X = dataset.data.features.copy()
+y = dataset.data.targets.copy()
+
+# 2. Bersihkan data: konversi 'Bare_nuclei' dan hapus NaN
+if X['Bare_nuclei'].dtype == 'object':
+    X['Bare_nuclei'] = pd.to_numeric(X['Bare_nuclei'], errors='coerce')
+
+X = X.dropna()
+y = y.loc[X.index]  # Samakan index setelah drop
+
+# 3. Split data
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# 4. Buat dan latih model Decision Tree
+clf = DecisionTreeClassifier(random_state=42)
+clf.fit(X_train, y_train)
+
+# 5. Prediksi
+y_pred = clf.predict(X_test)
+
+# 6. Evaluasi
+print("=== Akurasi ===")
+print(accuracy_score(y_test, y_pred))
+
+print("\n=== Classification Report ===")
+print(classification_report(y_test, y_pred, target_names=["Benign (2)", "Malignant (4)"]))
+
+# 7. Confusion Matrix
+cm = confusion_matrix(y_test, y_pred)
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=["Benign", "Malignant"], yticklabels=["Benign", "Malignant"])
+plt.xlabel("Prediksi")
+plt.ylabel("Aktual")
+plt.title("Confusion Matrix - Decision Tree")
+plt.show()
+
+# 8. Visualisasi Pohon Keputusan
+plt.figure(figsize=(20, 10))
+plot_tree(clf, feature_names=X.columns, class_names=["Benign", "Malignant"], filled=True, rounded=True)
+plt.title("Visualisasi Pohon Keputusan")
+plt.show()</code></pre><br>
+
+
+<h4>Output :</h4>
+                  
+<pre><code>=== Classification Report ===
+               precision    recall  f1-score   support
+
+   Benign (2)       0.92      0.97      0.94        79
+Malignant (4)       0.96      0.88      0.92        58
+
+     accuracy                           0.93       137
+    macro avg       0.94      0.93      0.93       137
+ weighted avg       0.94      0.93      0.93       137</code></pre><br>
+
+<h3>Evaluasi Model</h3>
+<p>disini saya menggunakan 3 jenis method untuk modelling yaitu Decission Tree, KNN dan SVM</p><br>
+<p>Decission Tree :<br>
+  Decission Tree (pohon keputusan) adalah metode klasifikasi atau prediksi yang menyajikan keputusan dalam bentuk pohon bercabang</p><br>
+<p>Kelebihan dan Kekurangan :<br>
+Kelebihan :<br>
+Mudah dipahami (seperti logika IF-THEN), Tidak butuh normalisasi data, Bisa digunakan untuk data numerik maupun kategori<br>
+Kekurangan :<br>
+Mudah overfitting, Sensitif terhadap perubahan kecil pada data, Kurang akurat dibanding model yang lebih kompleks jika data besar<br>
+</p>
+<p>Perhitungan :<br>
+1. Hitung Entrophy<br>
+    <img src="e_pu.png" class="logo__image only-light" alt="db"/>
+    <img src="e_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+2. Information Gain<br>
+    <img src="ig_pu.png" class="logo__image only-light" alt="db"/>
+    <img src="ig_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+3. Gain Ratio<br>
+    <img src="gr_pu.png" class="logo__image only-light" alt="db"/>
+    <img src="gr_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+4. Gini Index<br>
+    <img src="gi_pu.png" class="logo__image only-light" alt="db"/>
+    <img src="gi_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+</p><br>
+
+<p>Penerapan</p><br>
+<pre><code>from ucimlrepo import fetch_ucirepo
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Ambil dataset
+dataset = fetch_ucirepo(id=15)
+X = dataset.data.features.copy()
+y = dataset.data.targets.copy()
+
+# Bersihkan kolom Bare_nuclei
+if X['Bare_nuclei'].dtype == 'object':
+    X['Bare_nuclei'] = pd.to_numeric(X['Bare_nuclei'], errors='coerce')
+X = X.dropna()
+y = y.loc[X.index]
+
+# Normalisasi (opsional untuk Decision Tree, bisa di-skip)
+scaler = StandardScaler()
+X_scaled = pd.DataFrame(scaler.fit_transform(X), columns=X.columns)
+
+# Split train-test
+X_train, X_test, y_train, y_test = train_test_split(
+    X_scaled, y, test_size=0.2, random_state=42
+)
+
+# Model Decision Tree
+dt_model = DecisionTreeClassifier(random_state=42)
+dt_model.fit(X_train, y_train)
+
+# Prediksi
+y_pred = dt_model.predict(X_test)
+
+# Evaluasi
+print("=== Decision Tree Classifier ===")
+print(f"Akurasi: {accuracy_score(y_test, y_pred):.4f}")
+print("Classification Report:")
+print(classification_report(y_test, y_pred, target_names=["Benign (2)", "Malignant (4)"]))
+
+# Confusion Matrix
+cm = confusion_matrix(y_test, y_pred)
+plt.figure(figsize=(4, 3))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+            xticklabels=["Benign", "Malignant"],
+            yticklabels=["Benign", "Malignant"])
+plt.title("Confusion Matrix: Decision Tree")
+plt.xlabel("Prediksi")
+plt.ylabel("Aktual")
+plt.tight_layout()
+plt.show()
+</code></pre><br>
+<p>Hasil</p>
+    <img src="dt_pu.png" class="logo__image only-light" alt="db"/>
+    <img src="dt_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+                
+<p>
+
+  
+</p>
+<p>K-Nearest Neighbors (KNN)<br>
+Langkah-langkah KNN :<br>
+Tentukan jumlah tetangga (K) yang akan digunakan untuk pertimbangan penentuan kelas (metode cross validation)<br>
+Hitung jarak dari data baru ke masing-masing data point di dataset (eulidien distance)<br>
+Ambil tetangga terdekat menurut K, kemudian hitung rata-ratanya<br>
+</p>
+<p>Penerapan</p>
+<pre><code>from ucimlrepo import fetch_ucirepo
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Ambil dataset
+dataset = fetch_ucirepo(id=15)
+X = dataset.data.features.copy()
+y = dataset.data.targets.copy()
+
+# Bersihkan kolom Bare_nuclei
+if X['Bare_nuclei'].dtype == 'object':
+    X['Bare_nuclei'] = pd.to_numeric(X['Bare_nuclei'], errors='coerce')
+X = X.dropna()
+y = y.loc[X.index]
+
+# Normalisasi (WAJIB untuk KNN)
+scaler = StandardScaler()
+X_scaled = pd.DataFrame(scaler.fit_transform(X), columns=X.columns)
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(
+    X_scaled, y, test_size=0.2, random_state=42
+)
+
+# Model KNN (default k=5)
+knn_model = KNeighborsClassifier(n_neighbors=5)
+knn_model.fit(X_train, y_train)
+
+# Prediksi
+y_pred = knn_model.predict(X_test)
+
+# Evaluasi
+print("=== K-Nearest Neighbors Classifier ===")
+print(f"Akurasi: {accuracy_score(y_test, y_pred):.4f}")
+print("Classification Report:")
+print(classification_report(y_test, y_pred, target_names=["Benign (2)", "Malignant (4)"]))
+
+# Confusion Matrix
+cm = confusion_matrix(y_test, y_pred)
+plt.figure(figsize=(4, 3))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+            xticklabels=["Benign", "Malignant"],
+            yticklabels=["Benign", "Malignant"])
+plt.title("Confusion Matrix: KNN")
+plt.xlabel("Prediksi")
+plt.ylabel("Aktual")
+plt.tight_layout()
+plt.show()</code></pre><br>
+<p>Hasil</p>
+    <img src="knn_pu.png" class="logo__image only-light" alt="db"/>
+    <img src="knn_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+<p>
+
+  
+</p>
+<p>Support Vector Machine (SVM)<br>
+Langkah-langkah SVM :<br>
+Plot titik titik<br>
+Cari Garis tengah antara 2 kelas, ambil titik tengah mwnggunakan euclidean distance<br>
+Garis pemisah tegak lurus garis penghubung A–C<br>
+</p>
+<p>Penerapan :</p>
+<pre><code>from ucimlrepo import fetch_ucirepo
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Ambil dataset
+dataset = fetch_ucirepo(id=15)
+X = dataset.data.features.copy()
+y = dataset.data.targets.copy()
+
+# Bersihkan kolom Bare_nuclei
+if X['Bare_nuclei'].dtype == 'object':
+    X['Bare_nuclei'] = pd.to_numeric(X['Bare_nuclei'], errors='coerce')
+X = X.dropna()
+y = y.loc[X.index]
+
+# Normalisasi (WAJIB untuk SVM)
+scaler = StandardScaler()
+X_scaled = pd.DataFrame(scaler.fit_transform(X), columns=X.columns)
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(
+    X_scaled, y, test_size=0.2, random_state=42
+)
+
+# Model SVM (kernel default: RBF)
+svm_model = SVC(kernel='rbf', C=1.0, gamma='scale')  # Bisa coba 'linear', 'poly', dll
+svm_model.fit(X_train, y_train)
+
+# Prediksi
+y_pred = svm_model.predict(X_test)
+
+# Evaluasi
+print("=== Support Vector Machine Classifier ===")
+print(f"Akurasi: {accuracy_score(y_test, y_pred):.4f}")
+print("Classification Report:")
+print(classification_report(y_test, y_pred, target_names=["Benign (2)", "Malignant (4)"]))
+
+# Confusion Matrix
+cm = confusion_matrix(y_test, y_pred)
+plt.figure(figsize=(4, 3))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+            xticklabels=["Benign", "Malignant"],
+            yticklabels=["Benign", "Malignant"])
+plt.title("Confusion Matrix: SVM")
+plt.xlabel("Prediksi")
+plt.ylabel("Aktual")
+plt.tight_layout()
+plt.show()</code></pre><br>
+<p>Hasil :</p>
+    <img src="svm_pu.png" class="logo__image only-light" alt="db"/>
+    <img src="svm_pu.png" class="logo__image only-dark pst-js-only" alt="db"/><br>
+
+<!-- <section id="learn-more">
+<h2>Learn more<a class="headerlink" href="#learn-more" title="Link to this heading">#</a></h2>
+<p>This is just a simple starter to get you started.
+You can learn a lot more at <a class="reference external" href="https://jupyterbook.org">jupyterbook.org</a>.</p>
+</section> -->
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="hal4.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">Sebelumnya</p>
+        <p class="prev-next-title">Dellon Ismu Enyunanda</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Processing.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">Selanjutnya</p>
+        <p class="prev-next-title">Preprocessing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+<!--   <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-myst">What is MyST?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-roles-and-directives">Sample Roles and Directives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citations">Citations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learn-more">Learn more</a></li>
+</ul>
+  </nav></div>
+
+</div></div> -->
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<!-- <p class="component-author">
+By The Jupyter Book Community
+</p>
+ -->
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
